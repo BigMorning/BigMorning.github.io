@@ -12,7 +12,7 @@
     
     <title>
         
-            归档 | 
+            Boosting算法——AdaBoost（1） | 
         
         BigMorning&#39;s Blog
     </title>
@@ -38,7 +38,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="BigMorning">
     <meta name="description" itemprop="description" content="">
-    <meta name="keywords" content="null">
+    <meta name="keywords" content="null,机器学习,Boosting,AdaBoost">
 
     <!-- Site Verification -->
     
@@ -67,15 +67,18 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://yoursite.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="归档 | BigMorning&#39;s Blog">
+    <meta property="og:title" content="Boosting算法——AdaBoost（1） | BigMorning&#39;s Blog">
     <meta property="og:image" content="/img/favicon.png" />
     <meta property="og:description" content="">
-    
+    <meta property="og:article:tag" content="机器学习"> <meta property="og:article:tag" content="Boosting"> <meta property="og:article:tag" content="AdaBoost"> 
 
+    
+        <meta property="article:published_time" content="7月 16, 2017" />
+        <meta property="article:modified_time" content="7月 16, 2017" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="归档 | BigMorning&#39;s Blog">
+    <meta name="twitter:title" content="Boosting算法——AdaBoost（1） | BigMorning&#39;s Blog">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
@@ -83,13 +86,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://yoursite.com/archives/index.html" />
+        <link rel="canonical" href="http://yoursite.com/2017/07/16/BoostAlgorithm-AdaBoost/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "BigMorning&#39;s Blog",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "BigMorning",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "一只大水货的奋斗路"
+    },
+    "headline": "Boosting算法——AdaBoost（1）",
+    "url": "http://yoursite.com/2017/07/16/BoostAlgorithm-AdaBoost/index.html",
+    "datePublished": "7月 16, 2017",
+    "dateModified": "7月 16, 2017",
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
 
 
     
@@ -273,233 +306,434 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
     
-
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/07/16/BoostAlgorithm-AdaBoost/">Boosting算法——AdaBoost（1）</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            简介Boostin...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/07/16/BoostAlgorithm-AdaBoost/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="BigMorning's avatar">
-            </div>
-            <div>
-                <strong>BigMorning</strong>
-                <span>7月 16, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/机器学习/">机器学习</a>
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
             </span>
-
-            
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span id = "sourceId::2017/07/16/BoostAlgorithm-AdaBoost/" class = "cy_cmt_count" ></span>条评论
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
+        </a>
     </div>
-</div>
+    -->
 
-            
-            
-        
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
     
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#AdaBoost算法"><span class="post-toc-number">2.</span> <span class="post-toc-text">AdaBoost算法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#编程仿真"><span class="post-toc-number">3.</span> <span class="post-toc-text">编程仿真</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#尾巴"><span class="post-toc-number">4.</span> <span class="post-toc-text">尾巴</span></a></li></ol>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
     
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/07/14/about/">about</a></p>
-    </div>
 
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/07/14/about/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="BigMorning's avatar">
-            </div>
-            <div>
-                <strong>BigMorning</strong>
-                <span>7月 14, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
                 
-            </span>
-
-            
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span id = "sourceId::2017/07/14/about/" class = "cy_cmt_count" ></span>条评论
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/07/12/first_blog/">第一篇博客</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            这位是我的第一篇博客，我将做一些测试
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/07/12/first_blog/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="BigMorning's avatar">
-            </div>
-            <div>
-                <strong>BigMorning</strong>
-                <span>7月 12, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/生活琐事/">生活琐事</a>
-            </span>
-
-            
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span id = "sourceId::2017/07/12/first_blog/" class = "cy_cmt_count" ></span>条评论
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                Boosting算法——AdaBoost（1）
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>BigMorning</strong>
+        <span>7月 16, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/AdaBoost/">AdaBoost</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Boosting/">Boosting</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/机器学习/">机器学习</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Boosting算法——AdaBoost（1）&url=http://yoursite.com/2017/07/16/BoostAlgorithm-AdaBoost/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Boosting算法——AdaBoost（1）&url=http://yoursite.com/2017/07/16/BoostAlgorithm-AdaBoost/index.html&via=BigMorning" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/07/16/BoostAlgorithm-AdaBoost/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com/2017/07/16/BoostAlgorithm-AdaBoost/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。<br>比如有一组Data，它训练得到一个弱学习器$G(x)$</p>
+<script type="math/tex; mode=display">\mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}</script><p>假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么</p>
+<script type="math/tex; mode=display">\epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i)</script><p>其中$I(x)$表示指示函数，即</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+I_{A} = \left\{
+\begin{aligned}
+&1, x \in A \\
+&0, x  \not\in A
+\end{aligned}
+\right.
+\end{equation}</script><p>对于$\mathcal{D}$的初始弱分类器对与$(x_2,y_2)$分类出现错误，我们可以对这笔错误的$(x_2,y_2)$进行放大，比如重新调整$\mathcal{D}$的分布，得到</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\mathcal{D_{1}} = \{(x_1,y_1), (x_2,y_2),(x_2,y_2),(x_4,y_4),\}
+\end{equation}</script><p>对于重新生成的分不$\mathcal{D_1}$,可以引入权重$w$来体现每笔Data的重要性，那么</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\epsilon_i= &\sum_{i=1}^{4} w_i^{(m)} I(G(x_i) \neq y_i)  \\
+& (x_1, y_1), w_1 = \frac{1}{4}\\
+& (x_2, y_2), w_2 = \frac{2}{4}\\
+& (x_3, y_3), w_3 = 0\\
+& (x_4, y_4), w_4 = \frac{1}{4}
+\end{aligned}</script><p>这样也可以保证每次训练出来的若非类器不同。<br>常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。</p>
+<h1 id="AdaBoost算法"><a href="#AdaBoost算法" class="headerlink" title="AdaBoost算法"></a>AdaBoost算法</h1><p>上面举了简单的例子， 现在拓展到一般的情况来得到AdaBoost算法。还是假设现有一笔Training Data，</p>
+<script type="math/tex; mode=display">
+\mathcal{D} = \{(x_1,y_1), (x_2,y_2),...,(x_N,y_N)\}</script><p>其中$y_i \in \{-1, +1\}$.</p>
+<script type="math/tex; mode=display">G(\boldsymbol{x}) = \sum_{i=1}^{M} \alpha_i g_i(x)</script><p>其中$\alpha_i$表是每个弱分类器的重要性。<br>我们的目标是最小化分类error，利用指数损失函数</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(G|\mathcal{D}) &= E_{x\sim D}(e^{-\boldsymbol{y}G(\boldsymbol{x})})\\
+&=P(y=1|x)e^{-\boldsymbol{y}G(\boldsymbol{x})} + P(y=-1|x)e^{\boldsymbol{y}G(\boldsymbol{x})} 
+\end{aligned}</script><p>其中$E_{x\sim D}$表示$\boldsymbol{x}$在$\mathcal{D}$分布下的期望。<br>要使损失函数$L(G|\mathcal{D})$最小化,很自然的是对$G(x)$求偏导</p>
+<script type="math/tex; mode=display">
+\frac{\partial{L(G|\mathcal{D})}}{\partial{G(\boldsymbol(x))}} = -P(y=1|x)e^{-\boldsymbol{y}G(\boldsymbol{x})} + P(y=-1|x)e^{\boldsymbol{y}G(\boldsymbol{x})}</script><p>令导数等于0，可得</p>
+<script type="math/tex; mode=display">G(x) =\frac{1}{2} \ln{\frac{P(y=1|x)}{P(y=-1|x)}}</script><p>所以最后的分类器</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+I(G(x)) &= I(\frac{1}{2} \ln{\frac{P(y=1|x)}{P(y=-1|x)}})\\
+&= \left\{ 
+    \begin{aligned}
+    & 1,  P(y=1|x)>P(y=-1|x)\\
+    & 0,  P(y=1|x)<P(y=-1|x)
+    \end{aligned}
+\right.\\
+&= \arg \max_{y\in\{-1,1\}}P(f(x)=y|x)
+\end{aligned}</script><p>所以指数损失函数是0/1损失函数的一致替代损失函数。并且指数函数是可微的，可以用它来替代0/1损失函数作为优化目标。<br>在Adaboost中，第一个弱分类器是由训练数据权值均匀分布$\mathcal{D_1}$的得到的，此后迭代获得弱分类器$g_i(x)$和重要性$\alpha_i$，且调整权值分布得到新的$\mathcal{D_i}$，当第$i$次迭代产生的对应于重要性$\alpha_i$的弱分类器$g_i(x)$，基于$\mathcal{D_i}$的损失函数为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\alpha_i g_i|\mathcal{D_i}) &= E_{x\sim\mathcal{D_i}}[e^{-y\alpha_ig_i(x)}] \\
+&=P_{x\sim\mathcal{D_i}}(y=g_i(x))e^{-\alpha_i} + P(y\neq g_i(x))e^{\alpha_i} \\
+&=e^{-\alpha_i}(1-\epsilon_i) + e^{\alpha_i}\epsilon_i
+\end{aligned}</script><p>其中$\epsilon_i=P(y\neq g_i(x))$表示当前分布${D_i}$下的分类error。对损失函数求导可得</p>
+<script type="math/tex; mode=display">
+\frac{\partial{L(\alpha_i g_i|\mathcal{D_i})}}{\partial \alpha_i} = -e^{-\alpha_i}(1-\epsilon_i) + e^{\alpha_i} \epsilon_i</script><p>令导数等于0，可解得</p>
+<script type="math/tex; mode=display">
+\alpha_i=\frac{1}{2}\ln \left(\frac{1-\epsilon_i}{\epsilon_i}\right)</script><p>所得到的$\alpha_i$表示$g_i$在最终分类器的重要性。因为每一个弱分类器的性能比随机猜测要好一些，所以分类error会小于0，因此$\alpha_i&gt;0$.并且随着$\epsilon_i$的减小，$\alpha_i$会增大，所以分类error越小的弱分类器在最终分类器中的作用会越大。<br>AdaBoost在获得$G_{i-1}$的弱学习器之后，对样本分布进行调整，使得下一轮的弱分类器可以纠正$G_{i-1}$的一些错误。理想的$G_{i}$可以纠正所有$G_{i-1}$的错误，即最小化</p>
+<script type="math/tex; mode=display">
+L(G_{i-1}+g_i|\mathcal{D}) = E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}e^{-yg_i(x)}]</script><p>对上式使用$e^{-yg_i(x)}$的二阶泰勒展开式近似，且因为$y^2=g^2(x)=1$,可得</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\alpha_i g_i|\mathcal{D_i}) &\simeq E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}(1-yg_{i}(x)+\frac{y^2f_i^2(x)}{2})]\\
+&=E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}(1-yg_{i}(x)+\frac{1}{2})]
+\end{aligned}</script><p>所以理想的弱分类器</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+h_t&=\arg\min_hL(G_{i-1}+g_i|\mathcal{D})\\
+&= \arg\min_h E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}(x)(1-yg_{i}(x)+\frac{1}{2})]\\
+&= \arg\max E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}yg_{i}(x)]\\
+&= \arg\max E_{x\sim\mathcal{D}}\left[\frac{e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}yg_{i}(x)\right]
+\end{aligned}</script><p>因为$E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]$是常数，所以不改变函数整体的单调性，令$\mathcal{D_i}$表示一个新的分布，</p>
+<script type="math/tex; mode=display">
+\mathcal{D_i}(x)=\frac{\mathcal{D}(x)e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}</script><p>因此，$g_i(x)$可以在$\mathcal{D_i}$下表示</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+h_t(x) &= \arg\max E_{x\sim\mathcal{D}}\left[\frac{e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}yg_{i}(x)\right]\\
+&= \arg\max E_{x\sim\mathcal{D_t}}[yg_i(x)]
+\end{aligned}</script><p>因为$g(x),y\in\{-1, +1\}$,所以</p>
+<script type="math/tex; mode=display">
+yg(x)=1-2I(y\neq g_i(x))</script><p>所以理想的弱分类器$g_i(x)$</p>
+<script type="math/tex; mode=display">
+g_i(x) = \arg\min E_{x\sim\mathcal{D_t}}[I(y\neq g_i(x))]</script><p>由此可见， 理想的弱学习器应该在分布$\mathcal{D_i}$下最小化分类误差。<br>此外，考虑分布$\mathcal{D_i}$和$\mathcal{D}_{i+1}$的关系，根据上面的推导过程，可知</p>
+<script type="math/tex; mode=display">
+\mathcal{D_i}(x)=\frac{\mathcal{D}(x)e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}</script><p>这边的分布为了在算法中更好理解，可以换成它的每一个元素是之前提到的权重$w$，那么对于$w$的更新即</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+w_n^{i+1} &= \frac{w_n^{i}}{Z_i}\exp(-\alpha_iy_ng_i(x_n))\\
+&=\left\{
+    \begin{aligned}
+    &\frac{w_n^{i}}{Z_i}e^{-\alpha_i}, g_i(x_n)=y_n\\
+    &\frac{w_n^{i}}{Z_i}e^{\alpha_i}, g_i(x_n)\neq y_n
+    \end{aligned}
+\right.
+\end{aligned}</script><p>其中$Z_i$表示规划化因子， 因为$\sum_{n=1}^{N}w_{n} =1$</p>
+<script type="math/tex; mode=display">
+Z_i=\sum_{n=1}^{N}w_{n}^{i}\exp(-\alpha_iy_ng_i(x_n))</script><p>由上可知，被弱分类器$g_i(x)$分类错误的样本权值将会被放大，分类正确的样本权值被缩小。两者相比，分类错误的样本权值被放大了$e^{2\alpha_i} = \frac{\epsilon_i}{1-\epsilon_i}$倍。<br>综上所述，那么AdaBoost的算法表格为<br><strong>Adaboost算法</strong>：<br> <strong>1.</strong> 输入数据集合$\mathcal{D} = \{(x_1,y_1), (x_2,y_2),…,(x_N,y_N)\} $<br> <strong>2.</strong> 初始化权值分布$\mathcal{D_1}=(w_1^{1},…w_N^{1})$,其中$w_n^{1}=\frac{1}{N}, n=1,…N$<br> <strong>3.</strong> 对$i=1,…M$<br> (a).使用具有权值分布 $\mathcal{D_i}$的数据训练，得到弱分类器$g_i(x)$<br> (b).计算$g_i(x)$在训练数据上的分类误差$\epsilon_i=\sum_{n=1}^{N}w_n^iI(g_i(x_n\neq g_i(x_n)))$<br> (c).计算$g_i(x)$的重要洗系数$\alpha_i=\frac{1}{2}\ln{\frac{1-\epsilon_i}{\epsilon_i}}$<br> (d).更新数据集的权值分布<br>\begin{aligned}<br>\mathcal{D_{i+1}}=(w_1^{i},…w_N^{i})\\<br> w_n^{i+1} = \frac{w_n^{i}}{Z_i}\exp(-\alpha_iy_ng_i(x_n)) \\<br>Z_i=\sum_{n=1}^{N}w_{n}^{i}\exp(-\alpha_iy_ng_i(x_n))<br>\end{aligned}<br>其中$Z_i$是规范化因子。<br><strong>4.</strong>构建所有弱分类器的线性组合，得到最终分类器</p>
+<script type="math/tex; mode=display">
+G(x)=I[\sum_{i=1}^{M}\alpha_iG_i(x)]</script><h1 id="编程仿真"><a href="#编程仿真" class="headerlink" title="编程仿真"></a>编程仿真</h1><p>首先产生一组数据，我这里产生分割线为sin函数的一组数据<br>数据产生代码：</p>
+<pre class=" language-lang-python"><code class="language-lang-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def GenerateSinData(length):
+    x = 2 * np.pi * np.random.random(length)
+    y = 4 * np.random.random(length)
+    i = 0
+    result = np.zeros(x.shape)
+    while i < length:
+        if(y[i] >= np.sin(x[i]) + 2):
+            result[i] = 1
+            plt.plot(x[i], y[i], 'ro')
+        else:
+            result[i] = -1
+            plt.plot(x[i], y[i], 'bx')
+        i = i+1
+    plt.show()
+    X = np.array([x, y]).T
+    return X , result
+</code></pre>
+<p><img src="\img\TrainningData.png" alt="TrainningData"><br>弱学习我选择了DecisionStrump，单层CART树，如果将它直接应用于对上面数据的分类，由于是单层树，只能产生横线或者竖线，分类效果并不理想。<br>DecisionStrump代码：</p>
+<pre class=" language-lang-python"><code class="language-lang-python">import numpy as np
+def StumpClassify(X, j, thresh, ineq):
+    '''
+    X:数据集       j:属性列
+    thresh:阈值       ineq:比较
+    '''
+    pred = np.ones(X.shape[0])
+    if ineq == 'lt':
+        pred[X[:, j] <= thresh] = -1
+    else:
+        pred[X[:, j] > thresh] = 1
+    return pred
+
+def buildStump(X, y, w):
+    '''
+    X: 数据集
+    y: labels
+    w: 权值, 初始化为 np.ones(N)/N
+    '''
+    N, d = X.shape
+    #w = np.ones(N)/N
+    minErr = np.inf
+    numStep = 20
+    bestStump, bestLabel = {}, np.zeros(N)
+
+    for j in range(d):
+        rangeMin = X[:, j].min() 
+        rangeMax = X[:, j].max()
+        stepSize = (rangeMax - rangeMin)/numStep
+        for i in range(0, numStep+1):
+            thresh = rangeMin + i * stepSize
+            for ineq in ['lt', 'gt']:
+                pred = StumpClassify(X, j, thresh, ineq)
+                errLabel = np.ones(N)
+                errLabel[pred == y] = 0
+                weightedErr = w.dot(errLabel)
+                if minErr > weightedErr:
+                    minErr = weightedErr
+                    bestClass = pred
+                    bestStump['dim'] = j
+                    bestStump['ineq'] = ineq
+                    bestStump['thresh'] = thresh
+    return bestStump, minErr, bestClass
+</code></pre>
+<p>最后得到的分类误差是0.125<br><img src="\img\DecisionStumpResult.png" alt="TrainningData"></p>
+<p>将DecisionStrump作为弱学习器应用于AdaBoost,进行10次迭代，可以看出分类误差得到了明显的下降</p>
+<pre class=" language-lang-python"><code class="language-lang-python">import numpy as np
+from DecisionStump import *
+
+def AdaboostTest(DataArr, classLabel, iteration):
+    weakClassArr = []
+    N = DataArr.shape[0]
+    D = np.ones(N)/N
+    aggClassEst = np.zeros(N)
+    for i in range(iteration):
+        bestStump, error, classEst = buildStump(DataArr, classLabel, D)
+
+        alpha = float(0.5*np.log((1-error)/max(error, 1e-16)))
+        bestStump['alpha'] = alpha
+        weakClassArr.append(bestStump)
+        expon = np.multiply(-1*alpha*classLabel.T, classEst)
+        D = np.multiply(D, np.exp(expon))
+        D = D/D.sum()
+        aggClassEst += alpha*classEst
+
+        aggErrors = np.multiply(np.sign(aggClassEst) != classLabel.T, np.ones(N))
+        errorRate = aggErrors.sum()/N
+        print("Total errtor", errorRate, "\n")
+        if errorRate == 0.0: 
+            break
+    return  weakClassArr
+</code></pre>
+<p>Total error 0.125<br>Total error 0.125<br>Total error 0.085<br>Total error 0.06<br>Total error 0.06<br>Total error 0.06<br>Total error 0.04<br>Total error 0.04<br>Total error 0.04<br>Total error 0.045<br><img src="\img\AdaBoostResult.png" alt="TrainningData"></p>
+<h1 id="尾巴"><a href="#尾巴" class="headerlink" title="尾巴"></a>尾巴</h1><p>这是我第一次写博客，选择AdaBoost算法开始是因为前段时间正好看完了台大林轩田老师关于Blending的内容，觉得由推导到算法都很神奇。这篇博客内容虽然并不是很多，但是我写了大概一天（一直在打公式），感觉条理不明确，思路也不清晰，大多都是在参考书上的内容，自己的理解比较少，希望自己可以继续加油，在以后的博客里多增加一些自己的思考。</p>
+<p><strong>参考：</strong><br>1、统计学习方法—李航<br>2、机器学习—周志华<br>3、机器学习实战<br>4、机器学习技法—台湾大学林轩田老师公开课</p>
+
+    
+
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 changyan -->
+<div id="changyan-comment">
+    <!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="2017/07/16/BoostAlgorithm-AdaBoost/"  ></div>
+<script type="text/javascript">
+(function(){
+var appid = 'cyt78gWUB';
+var conf = 'prod_46852c92acc0a2c87c00473596d696a2';
+var width = window.innerWidth || document.documentElement.clientWidth;
+if (width < 960) {
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+</div>
+<style>
+    #changyan-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/07/14/about/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
