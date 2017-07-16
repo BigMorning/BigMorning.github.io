@@ -5,104 +5,92 @@
     <entry>
       <title><![CDATA[Boosting算法——AdaBoost（1）]]></title>
       <url>/2017/07/16/BoostAlgorithm-AdaBoost/</url>
-      <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。<br>比如有一组Data，它训练得到一个弱学习器$G(x)$</p>
-<script type="math/tex; mode=display">\mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}</script><p>假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么</p>
-<script type="math/tex; mode=display">\epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i)</script><p>其中$I(x)$表示指示函数，即</p>
-<script type="math/tex; mode=display">
-\begin{equation}
+      <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。<br>比如有一组Data，它训练得到一个弱学习器$G(x)$<br><span>$$\begin{equation}
+ \mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}  
+\end{equation}$$</span><!-- Has MathJax --><br>假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么<br> <span>$$\begin{equation}
+\epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i) 
+\end{equation}$$</span><!-- Has MathJax --><br>其中$I(x)$表示指示函数，即<br><span>$$\begin{equation}
 I_{A} = \left\{
 \begin{aligned}
-&1, x \in A \\
-&0, x  \not\in A
+&amp;1, x \in A \\
+&amp;0, x  \not\in A
 \end{aligned}
 \right.
-\end{equation}</script><p>对于$\mathcal{D}$的初始弱分类器对与$(x_2,y_2)$分类出现错误，我们可以对这笔错误的$(x_2,y_2)$进行放大，比如重新调整$\mathcal{D}$的分布，得到</p>
-<script type="math/tex; mode=display">
-\begin{equation}
+\end{equation}$$</span><!-- Has MathJax --><br>对于$\mathcal{D}$的初始弱分类器对与$(x_2,y_2)$分类出现错误，我们可以对这笔错误的$(x_2,y_2)$进行放大，比如重新调整$\mathcal{D}$的分布，得到<br><span>$$\begin{equation}
 \mathcal{D_{1}} = \{(x_1,y_1), (x_2,y_2),(x_2,y_2),(x_4,y_4),\}
-\end{equation}</script><p>对于重新生成的分不$\mathcal{D_1}$,可以引入权重$w$来体现每笔Data的重要性，那么</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\epsilon_i= &\sum_{i=1}^{4} w_i^{(m)} I(G(x_i) \neq y_i)  \\
-& (x_1, y_1), w_1 = \frac{1}{4}\\
-& (x_2, y_2), w_2 = \frac{2}{4}\\
-& (x_3, y_3), w_3 = 0\\
-& (x_4, y_4), w_4 = \frac{1}{4}
-\end{aligned}</script><p>这样也可以保证每次训练出来的若非类器不同。<br>常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。</p>
-<h1 id="AdaBoost算法"><a href="#AdaBoost算法" class="headerlink" title="AdaBoost算法"></a>AdaBoost算法</h1><p>上面举了简单的例子， 现在拓展到一般的情况来得到AdaBoost算法。还是假设现有一笔Training Data，</p>
-<script type="math/tex; mode=display">
-\mathcal{D} = \{(x_1,y_1), (x_2,y_2),...,(x_N,y_N)\}</script><p>其中$y_i \in \{-1, +1\}$.</p>
-<script type="math/tex; mode=display">G(\boldsymbol{x}) = \sum_{i=1}^{M} \alpha_i g_i(x)</script><p>其中$\alpha_i$表是每个弱分类器的重要性。<br>我们的目标是最小化分类error，利用指数损失函数</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-L(G|\mathcal{D}) &= E_{x\sim D}(e^{-\boldsymbol{y}G(\boldsymbol{x})})\\
-&=P(y=1|x)e^{-\boldsymbol{y}G(\boldsymbol{x})} + P(y=-1|x)e^{\boldsymbol{y}G(\boldsymbol{x})} 
-\end{aligned}</script><p>其中$E_{x\sim D}$表示$\boldsymbol{x}$在$\mathcal{D}$分布下的期望。<br>要使损失函数$L(G|\mathcal{D})$最小化,很自然的是对$G(x)$求偏导</p>
-<script type="math/tex; mode=display">
-\frac{\partial{L(G|\mathcal{D})}}{\partial{G(\boldsymbol(x))}} = -P(y=1|x)e^{-\boldsymbol{y}G(\boldsymbol{x})} + P(y=-1|x)e^{\boldsymbol{y}G(\boldsymbol{x})}</script><p>令导数等于0，可得</p>
-<script type="math/tex; mode=display">G(x) =\frac{1}{2} \ln{\frac{P(y=1|x)}{P(y=-1|x)}}</script><p>所以最后的分类器</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-I(G(x)) &= I(\frac{1}{2} \ln{\frac{P(y=1|x)}{P(y=-1|x)}})\\
-&= \left\{ 
+\end{equation}$$</span><!-- Has MathJax --><br>对于重新生成的分不$\mathcal{D_1}$,可以引入权重$w$来体现每笔Data的重要性，那么<br><span>$$\begin{aligned}
+\epsilon_i= &amp;\sum_{i=1}^{4} w_i^{(m)} I(G(x_i) \neq y_i)  \\
+&amp; (x_1, y_1), w_1 = \frac{1}{4}\\
+&amp; (x_2, y_2), w_2 = \frac{2}{4}\\
+&amp; (x_3, y_3), w_3 = 0\\
+&amp; (x_4, y_4), w_4 = \frac{1}{4}
+\end{aligned}$$</span><!-- Has MathJax --><br>这样也可以保证每次训练出来的若非类器不同。<br>常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。</p>
+<h1 id="AdaBoost算法"><a href="#AdaBoost算法" class="headerlink" title="AdaBoost算法"></a>AdaBoost算法</h1><p>上面举了简单的例子， 现在拓展到一般的情况来得到AdaBoost算法。还是假设现有一笔Training Data，<br><span>$$\begin{equation}
+\mathcal{D} = \{(x_1,y_1), (x_2,y_2),...,(x_N,y_N)\} 
+\end{equation}$$</span><!-- Has MathJax --><br>其中$y_i \in \{-1, +1\}$.<br><span>$$\begin{equation}
+G(\boldsymbol{x}) = \sum_{i=1}^{M} \alpha_i g_i(x)
+\end{equation}$$</span><!-- Has MathJax --><br>其中$\alpha_i$表是每个弱分类器的重要性。<br>我们的目标是最小化分类error，利用指数损失函数<br><span>$$\begin{aligned}
+L(G|\mathcal{D}) &amp;= E_{x\sim D}(e^{-\boldsymbol{y}G(\boldsymbol{x})})\\
+&amp;=P(y=1|x)e^{-\boldsymbol{y}G(\boldsymbol{x})} + P(y=-1|x)e^{\boldsymbol{y}G(\boldsymbol{x})} 
+\end{aligned}$$</span><!-- Has MathJax --><br>其中$E_{x\sim D}$表示$\boldsymbol{x}$在$\mathcal{D}$分布下的期望。<br>要使损失函数$L(G|\mathcal{D})$最小化,很自然的是对$G(x)$求偏导<br><span>$$\begin{equation}
+\frac{\partial{L(G|\mathcal{D})}}{\partial{G(\boldsymbol(x))}} = -P(y=1|x)e^{-\boldsymbol{y}G(\boldsymbol{x})} + P(y=-1|x)e^{\boldsymbol{y}G(\boldsymbol{x})}
+\end{equation}$$</span><!-- Has MathJax --><br>令导数等于0，可得<br><span>$$\begin{equation} 
+G(x) =\frac{1}{2} \ln{\frac{P(y=1|x)}{P(y=-1|x)}} 
+\end{equation}$$</span><!-- Has MathJax --><br>所以最后的分类器<br><span>$$\begin{aligned}
+I(G(x)) &amp;= I(\frac{1}{2} \ln{\frac{P(y=1|x)}{P(y=-1|x)}})\\
+&amp;= \left\{ 
     \begin{aligned}
-    & 1,  P(y=1|x)>P(y=-1|x)\\
-    & 0,  P(y=1|x)<P(y=-1|x)
+    &amp; 1,  P(y=1|x)&gt;P(y=-1|x)\\
+    &amp; 0,  P(y=1|x)&lt;P(y=-1|x)
     \end{aligned}
 \right.\\
-&= \arg \max_{y\in\{-1,1\}}P(f(x)=y|x)
-\end{aligned}</script><p>所以指数损失函数是0/1损失函数的一致替代损失函数。并且指数函数是可微的，可以用它来替代0/1损失函数作为优化目标。<br>在Adaboost中，第一个弱分类器是由训练数据权值均匀分布$\mathcal{D_1}$的得到的，此后迭代获得弱分类器$g_i(x)$和重要性$\alpha_i$，且调整权值分布得到新的$\mathcal{D_i}$，当第$i$次迭代产生的对应于重要性$\alpha_i$的弱分类器$g_i(x)$，基于$\mathcal{D_i}$的损失函数为</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-L(\alpha_i g_i|\mathcal{D_i}) &= E_{x\sim\mathcal{D_i}}[e^{-y\alpha_ig_i(x)}] \\
-&=P_{x\sim\mathcal{D_i}}(y=g_i(x))e^{-\alpha_i} + P(y\neq g_i(x))e^{\alpha_i} \\
-&=e^{-\alpha_i}(1-\epsilon_i) + e^{\alpha_i}\epsilon_i
-\end{aligned}</script><p>其中$\epsilon_i=P(y\neq g_i(x))$表示当前分布${D_i}$下的分类error。对损失函数求导可得</p>
-<script type="math/tex; mode=display">
-\frac{\partial{L(\alpha_i g_i|\mathcal{D_i})}}{\partial \alpha_i} = -e^{-\alpha_i}(1-\epsilon_i) + e^{\alpha_i} \epsilon_i</script><p>令导数等于0，可解得</p>
-<script type="math/tex; mode=display">
-\alpha_i=\frac{1}{2}\ln \left(\frac{1-\epsilon_i}{\epsilon_i}\right)</script><p>所得到的$\alpha_i$表示$g_i$在最终分类器的重要性。因为每一个弱分类器的性能比随机猜测要好一些，所以分类error会小于0，因此$\alpha_i&gt;0$.并且随着$\epsilon_i$的减小，$\alpha_i$会增大，所以分类error越小的弱分类器在最终分类器中的作用会越大。<br>AdaBoost在获得$G_{i-1}$的弱学习器之后，对样本分布进行调整，使得下一轮的弱分类器可以纠正$G_{i-1}$的一些错误。理想的$G_{i}$可以纠正所有$G_{i-1}$的错误，即最小化</p>
-<script type="math/tex; mode=display">
-L(G_{i-1}+g_i|\mathcal{D}) = E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}e^{-yg_i(x)}]</script><p>对上式使用$e^{-yg_i(x)}$的二阶泰勒展开式近似，且因为$y^2=g^2(x)=1$,可得</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-L(\alpha_i g_i|\mathcal{D_i}) &\simeq E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}(1-yg_{i}(x)+\frac{y^2f_i^2(x)}{2})]\\
-&=E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}(1-yg_{i}(x)+\frac{1}{2})]
-\end{aligned}</script><p>所以理想的弱分类器</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-h_t&=\arg\min_hL(G_{i-1}+g_i|\mathcal{D})\\
-&= \arg\min_h E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}(x)(1-yg_{i}(x)+\frac{1}{2})]\\
-&= \arg\max E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}yg_{i}(x)]\\
-&= \arg\max E_{x\sim\mathcal{D}}\left[\frac{e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}yg_{i}(x)\right]
-\end{aligned}</script><p>因为$E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]$是常数，所以不改变函数整体的单调性，令$\mathcal{D_i}$表示一个新的分布，</p>
-<script type="math/tex; mode=display">
-\mathcal{D_i}(x)=\frac{\mathcal{D}(x)e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}</script><p>因此，$g_i(x)$可以在$\mathcal{D_i}$下表示</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-h_t(x) &= \arg\max E_{x\sim\mathcal{D}}\left[\frac{e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}yg_{i}(x)\right]\\
-&= \arg\max E_{x\sim\mathcal{D_t}}[yg_i(x)]
-\end{aligned}</script><p>因为$g(x),y\in\{-1, +1\}$,所以</p>
-<script type="math/tex; mode=display">
-yg(x)=1-2I(y\neq g_i(x))</script><p>所以理想的弱分类器$g_i(x)$</p>
-<script type="math/tex; mode=display">
-g_i(x) = \arg\min E_{x\sim\mathcal{D_t}}[I(y\neq g_i(x))]</script><p>由此可见， 理想的弱学习器应该在分布$\mathcal{D_i}$下最小化分类误差。<br>此外，考虑分布$\mathcal{D_i}$和$\mathcal{D}_{i+1}$的关系，根据上面的推导过程，可知</p>
-<script type="math/tex; mode=display">
-\mathcal{D_i}(x)=\frac{\mathcal{D}(x)e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}</script><p>这边的分布为了在算法中更好理解，可以换成它的每一个元素是之前提到的权重$w$，那么对于$w$的更新即</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-w_n^{i+1} &= \frac{w_n^{i}}{Z_i}\exp(-\alpha_iy_ng_i(x_n))\\
-&=\left\{
+&amp;= \arg \max_{y\in\{-1,1\}}P(f(x)=y|x)
+\end{aligned}$$</span><!-- Has MathJax --></p>
+<p>所以指数损失函数是0/1损失函数的一致替代损失函数。并且指数函数是可微的，可以用它来替代0/1损失函数作为优化目标。<br>在Adaboost中，第一个弱分类器是由训练数据权值均匀分布$\mathcal{D_1}$的得到的，此后迭代获得弱分类器$g_i(x)$和重要性$\alpha_i$，且调整权值分布得到新的$\mathcal{D_i}$，当第$i$次迭代产生的对应于重要性$\alpha_i$的弱分类器$g_i(x)$，基于$\mathcal{D_i}$的损失函数为<br><span>$$\begin{aligned}
+L(\alpha_i g_i|\mathcal{D_i}) &amp;= E_{x\sim\mathcal{D_i}}[e^{-y\alpha_ig_i(x)}] \\
+&amp;=P_{x\sim\mathcal{D_i}}(y=g_i(x))e^{-\alpha_i} + P(y\neq g_i(x))e^{\alpha_i} \\
+&amp;=e^{-\alpha_i}(1-\epsilon_i) + e^{\alpha_i}\epsilon_i
+\end{aligned}$$</span><!-- Has MathJax --><br>其中$\epsilon_i=P(y\neq g_i(x))$表示当前分布${D_i}$下的分类error。对损失函数求导可得</p>
+<span>$$\begin{equation}
+\frac{\partial{L(\alpha_i g_i|\mathcal{D_i})}}{\partial \alpha_i} = -e^{-\alpha_i}(1-\epsilon_i) + e^{\alpha_i} \epsilon_i
+\end{equation}$$</span><!-- Has MathJax -->
+<p>令导数等于0，可解得<br><span>$$\begin{equation}
+\alpha_i=\frac{1}{2}\ln \left(\frac{1-\epsilon_i}{\epsilon_i}\right)
+\end{equation}$$</span><!-- Has MathJax --><br>所得到的$\alpha_i$表示$g_i$在最终分类器的重要性。因为每一个弱分类器的性能比随机猜测要好一些，所以分类error会小于0，因此$\alpha_i&gt;0$.并且随着$\epsilon_i$的减小，$\alpha_i$会增大，所以分类error越小的弱分类器在最终分类器中的作用会越大。<br>AdaBoost在获得$G_{i-1}$的弱学习器之后，对样本分布进行调整，使得下一轮的弱分类器可以纠正$G_{i-1}$的一些错误。理想的$G_{i}$可以纠正所有$G_{i-1}$的错误，即最小化<br><span>$$\begin{equation}
+L(G_{i-1}+g_i|\mathcal{D}) = E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}e^{-yg_i(x)}]
+\end{equation}$$</span><!-- Has MathJax --><br>对上式使用$e^{-yg_i(x)}$的二阶泰勒展开式近似，且因为$y^2=g^2(x)=1$,可得<br><span>$$\begin{aligned}
+L(\alpha_i g_i|\mathcal{D_i}) &amp;\simeq E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}(1-yg_{i}(x)+\frac{y^2f_i^2(x)}{2})]\\
+&amp;=E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}(1-yg_{i}(x)+\frac{1}{2})]
+\end{aligned}$$</span><!-- Has MathJax --><br>所以理想的弱分类器<br><span>$$\begin{aligned}
+h_t&amp;=\arg\min_hL(G_{i-1}+g_i|\mathcal{D})\\
+&amp;= \arg\min_h E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}(x)(1-yg_{i}(x)+\frac{1}{2})]\\
+&amp;= \arg\max E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}yg_{i}(x)]\\
+&amp;= \arg\max E_{x\sim\mathcal{D}}\left[\frac{e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}yg_{i}(x)\right]
+\end{aligned}$$</span><!-- Has MathJax --><br>因为$E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]$是常数，所以不改变函数整体的单调性，令$\mathcal{D_i}$表示一个新的分布，<br><span>$$\begin{equation}
+\mathcal{D_i}(x)=\frac{\mathcal{D}(x)e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}
+\end{equation}$$</span><!-- Has MathJax --><br>因此，$g_i(x)$可以在$\mathcal{D_i}$下表示<br><span>$$\begin{aligned}
+h_t(x) &amp;= \arg\max E_{x\sim\mathcal{D}}\left[\frac{e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}yg_{i}(x)\right]\\
+&amp;= \arg\max E_{x\sim\mathcal{D_t}}[yg_i(x)]
+\end{aligned}$$</span><!-- Has MathJax --><br>因为$g(x),y\in\{-1, +1\}$,所以<br><span>$$\begin{equation}
+yg(x)=1-2I(y\neq g_i(x))
+\end{equation}$$</span><!-- Has MathJax --><br>所以理想的弱分类器$g_i(x)$<br><span>$$\begin{equation}
+g_i(x) = \arg\min E_{x\sim\mathcal{D_t}}[I(y\neq g_i(x))]
+\end{equation}$$</span><!-- Has MathJax --><br>由此可见， 理想的弱学习器应该在分布$\mathcal{D_i}$下最小化分类误差。<br>此外，考虑分布$\mathcal{D_i}$和$\mathcal{D}_{i+1}$的关系，根据上面的推导过程，可知<br><span>$$\begin{equation}
+\mathcal{D_i}(x)=\frac{\mathcal{D}(x)e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}
+\end{equation}$$</span><!-- Has MathJax --><br>这边的分布为了在算法中更好理解，可以换成它的每一个元素是之前提到的权重$w$，那么对于$w$的更新即<br><span>$$\begin{aligned}
+w_n^{i+1} &amp;= \frac{w_n^{i}}{Z_i}\exp(-\alpha_iy_ng_i(x_n))\\
+&amp;=\left\{
     \begin{aligned}
-    &\frac{w_n^{i}}{Z_i}e^{-\alpha_i}, g_i(x_n)=y_n\\
-    &\frac{w_n^{i}}{Z_i}e^{\alpha_i}, g_i(x_n)\neq y_n
+    &amp;\frac{w_n^{i}}{Z_i}e^{-\alpha_i}, g_i(x_n)=y_n\\
+    &amp;\frac{w_n^{i}}{Z_i}e^{\alpha_i}, g_i(x_n)\neq y_n
     \end{aligned}
 \right.
-\end{aligned}</script><p>其中$Z_i$表示规划化因子， 因为$\sum_{n=1}^{N}w_{n} =1$</p>
-<script type="math/tex; mode=display">
-Z_i=\sum_{n=1}^{N}w_{n}^{i}\exp(-\alpha_iy_ng_i(x_n))</script><p>由上可知，被弱分类器$g_i(x)$分类错误的样本权值将会被放大，分类正确的样本权值被缩小。两者相比，分类错误的样本权值被放大了$e^{2\alpha_i} = \frac{\epsilon_i}{1-\epsilon_i}$倍。<br>综上所述，那么AdaBoost的算法表格为<br><strong>Adaboost算法</strong>：<br> <strong>1.</strong> 输入数据集合$\mathcal{D} = \{(x_1,y_1), (x_2,y_2),…,(x_N,y_N)\} $<br> <strong>2.</strong> 初始化权值分布$\mathcal{D_1}=(w_1^{1},…w_N^{1})$,其中$w_n^{1}=\frac{1}{N}, n=1,…N$<br> <strong>3.</strong> 对$i=1,…M$<br> (a).使用具有权值分布 $\mathcal{D_i}$的数据训练，得到弱分类器$g_i(x)$<br> (b).计算$g_i(x)$在训练数据上的分类误差$\epsilon_i=\sum_{n=1}^{N}w_n^iI(g_i(x_n\neq g_i(x_n)))$<br> (c).计算$g_i(x)$的重要洗系数$\alpha_i=\frac{1}{2}\ln{\frac{1-\epsilon_i}{\epsilon_i}}$<br> (d).更新数据集的权值分布<br>\begin{aligned}<br>\mathcal{D_{i+1}}=(w_1^{i},…w_N^{i})\\<br> w_n^{i+1} = \frac{w_n^{i}}{Z_i}\exp(-\alpha_iy_ng_i(x_n)) \\<br>Z_i=\sum_{n=1}^{N}w_{n}^{i}\exp(-\alpha_iy_ng_i(x_n))<br>\end{aligned}<br>其中$Z_i$是规范化因子。<br><strong>4.</strong>构建所有弱分类器的线性组合，得到最终分类器</p>
-<script type="math/tex; mode=display">
-G(x)=I[\sum_{i=1}^{M}\alpha_iG_i(x)]</script><h1 id="编程仿真"><a href="#编程仿真" class="headerlink" title="编程仿真"></a>编程仿真</h1><p>首先产生一组数据，我这里产生分割线为sin函数的一组数据<br>数据产生代码：</p>
+\end{aligned}$$</span><!-- Has MathJax --><br>其中$Z_i$表示规划化因子， 因为$\sum_{n=1}^{N}w_{n} =1$<br><span>$Z_i=\sum_{n=1}^{N}w_{n}^{i}\exp(-\alpha_iy_ng_i(x_n))$</span><!-- Has MathJax --><br>由上可知，被弱分类器$g_i(x)$分类错误的样本权值将会被放大，分类正确的样本权值被缩小。两者相比，分类错误的样本权值被放大了$e^{2\alpha_i} = \frac{\epsilon_i}{1-\epsilon_i}$倍。<br>综上所述，那么AdaBoost的算法表格为<br><strong>Adaboost算法</strong>：<br> <strong>1.</strong> 输入数据集合$\mathcal{D} = \{(x_1,y_1), (x_2,y_2),…,(x_N,y_N)\} $<br> <strong>2.</strong> 初始化权值分布$\mathcal{D_1}=(w_1^{1},…w_N^{1})$,其中$w_n^{1}=\frac{1}{N}, n=1,…N$<br> <strong>3.</strong> 对$i=1,…M$<br> (a).使用具有权值分布 $\mathcal{D_i}$的数据训练，得到弱分类器$g_i(x)$<br> (b).计算$g_i(x)$在训练数据上的分类误差$\epsilon_i=\sum_{n=1}^{N}w_n^iI(g_i(x_n\neq g_i(x_n)))$<br> (c).计算$g_i(x)$的重要洗系数$\alpha_i=\frac{1}{2}\ln{\frac{1-\epsilon_i}{\epsilon_i}}$<br> (d).更新数据集的权值分布<br> <span>$$\begin{aligned}
+\mathcal{D_{i+1}}=(w_1^{i},...w_N^{i})\\
+ w_n^{i+1} = \frac{w_n^{i}}{Z_i}\exp(-\alpha_iy_ng_i(x_n)) \\
+Z_i=\sum_{n=1}^{N}w_{n}^{i}\exp(-\alpha_iy_ng_i(x_n))
+\end{aligned}$$</span><!-- Has MathJax --><br>其中$Z_i$是规范化因子。<br><strong>4.</strong>构建所有弱分类器的线性组合，得到最终分类器<br><span>$G(x)=I[\sum_{i=1}^{M}\alpha_iG_i(x)]$</span><!-- Has MathJax --></p>
+<h1 id="编程仿真"><a href="#编程仿真" class="headerlink" title="编程仿真"></a>编程仿真</h1><p>首先产生一组数据，我这里产生分割线为sin函数的一组数据<br>数据产生代码：</p>
 <pre class=" language-lang-python"><code class="language-lang-python">import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -218,14 +206,6 @@ def AdaboostTest(DataArr, classLabel, iteration):
             <tag> AdaBoost </tag>
             
         </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[about]]></title>
-      <url>/2017/07/14/about/</url>
-      <content type="html"></content>
-      
         
     </entry>
     
