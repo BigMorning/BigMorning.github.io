@@ -12,7 +12,7 @@
     
     <title>
         
-            about | 
+            第一次kaggle经历 | 
         
         BigMorning&#39;s Blog
     </title>
@@ -38,7 +38,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="BigMorning">
     <meta name="description" itemprop="description" content="">
-    <meta name="keywords" content="null">
+    <meta name="keywords" content="null,kaggle,机器学习,总结">
 
     <!-- Site Verification -->
     
@@ -67,15 +67,18 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://yoursite.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="about | BigMorning&#39;s Blog">
+    <meta property="og:title" content="第一次kaggle经历 | BigMorning&#39;s Blog">
     <meta property="og:image" content="/img/favicon.png" />
     <meta property="og:description" content="">
-    
+    <meta property="og:article:tag" content="kaggle"> <meta property="og:article:tag" content="机器学习"> <meta property="og:article:tag" content="总结"> 
 
+    
+        <meta property="article:published_time" content="8月 20, 2017" />
+        <meta property="article:modified_time" content="9月 03, 2017" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="about | BigMorning&#39;s Blog">
+    <meta name="twitter:title" content="第一次kaggle经历 | BigMorning&#39;s Blog">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
@@ -83,13 +86,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://yoursite.com/about/index.html" />
+        <link rel="canonical" href="http://yoursite.com/2017/08/20/FirstKaggleSummary/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "BigMorning&#39;s Blog",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "BigMorning",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "一只大水货的奋斗路"
+    },
+    "headline": "第一次kaggle经历",
+    "url": "http://yoursite.com/2017/08/20/FirstKaggleSummary/index.html",
+    "datePublished": "8月 20, 2017",
+    "dateModified": "9月 03, 2017",
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
 
 
     
@@ -275,6 +308,43 @@
 
                     <!-- Post TOC -->
 
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引言"><span class="post-toc-number">1.</span> <span class="post-toc-text">引言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数据探索"><span class="post-toc-number">2.</span> <span class="post-toc-text">数据探索</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#特征工程"><span class="post-toc-number">3.</span> <span class="post-toc-text">特征工程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用户特征"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">用户特征</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#商品特征"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">商品特征</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用户商品特征"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">用户商品特征</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用户部门特征"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">用户部门特征</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用户通道特征"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">用户通道特征</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时间特征"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">时间特征</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类别特征"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">类别特征</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#模型设计"><span class="post-toc-number">4.</span> <span class="post-toc-text">模型设计</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+    
+
+
+
+
 
 <!-- Layouts -->
 
@@ -301,7 +371,7 @@
         
     
             <p class="article-headline-p">
-                about
+                第一次kaggle经历
             </p>
         </div>
 
@@ -320,7 +390,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>BigMorning</strong>
-        <span>7月 14, 2017</span>
+        <span>8月 20, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -344,7 +414,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        
+        <a class="post_tag-link" href="/tags/kaggle/">kaggle</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/总结/">总结</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/机器学习/">机器学习</a>
     </ul>
     
 
@@ -360,7 +430,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=about&url=http://yoursite.com/about/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=第一次kaggle经历&url=http://yoursite.com/2017/08/20/FirstKaggleSummary/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -369,7 +439,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=about&url=http://yoursite.com/about/index.html&via=BigMorning" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=第一次kaggle经历&url=http://yoursite.com/2017/08/20/FirstKaggleSummary/index.html&via=BigMorning" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -378,7 +448,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/about/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/08/20/FirstKaggleSummary/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -387,7 +457,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com/about/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com/2017/08/20/FirstKaggleSummary/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -411,11 +481,67 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a><strong>关于我</strong></h1><hr>
-<blockquote>
-<p>BigMorning — 一只大水货</p>
-</blockquote>
-<p>宅男一只</p>
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>最近真是折腾死了，本来之前想着每个礼拜都更新博客的，但是继上次参加了京东的JData比赛之后，一直想再做一次数据挖掘的比赛，于是就发现了这次的Instacart Market Basket Analysis的比赛，入坑比较晚了，比赛差不多还有一个月就快结束了，再加上后面浪了好几天，真正开始好好做的时候，还剩下差不多20天左右了，更坑爹的是离比赛结束还有3、4天左右，实验室断网了！！！最后7天LB变动特别大，由于实验室断网，没有办法连上服务器，没有跟上LB的节奏，最后取得了 145名（top 6%），感觉很可惜但是想想也知足了,也对得起我最后熬了一夜了，哈哈。毕竟Kaggle上藏龙卧虎，随便看看排名靠前的人的介绍，有Kaggle排名靠前的expert，世界名校的研究生，知名公司的数据科学家，看着好自卑。。。但是也正是因为有这些人在Kaggle上的讨论和分享，每一次感到迷茫不知道前进方向在哪的时候，逛一逛Kaggle的Discussion总是能有新的发现。在比赛期间，每天早上到实验室总会线上Kaggle的Discussion逛一逛，围观大牛们的经验分享、灵感交流、吐槽， 也是别有一番风味的。<br>这次比赛是通过Instacart之前的购买记录来预测用户下一单重复购买产品，与我之前做的JData的比赛有一些相似，都是购买预测的类型，不同的是JData是通过用户与商品的交互来预测用户会下单的商品，而这次是用户的购买记录预测下一单会重复购买的商品，不过两个比赛有确实有很多相似的特征。</p>
+<h1 id="数据探索"><a href="#数据探索" class="headerlink" title="数据探索"></a>数据探索</h1><p>因为比赛加入的晚，所以EDA这一块很多都是借鉴Kernel上的分享，非常感谢Kernel的各位大牛的分享。<br>这次比赛一共给了7个csv文件，分别是order products prior, order products train, orders, products, aisles, departments和 样本提交文件sample submission。数据之间的关系如下图所示<br><img src="\img\instacartFiles.png" alt="DataUnderstanding"></p>
+<p>数据集划分为prior，train，test；从prior中提取特征，train作为训练，test预测（Kaggle上也有人说prior+train提取特征会有一点提升，我没有尝试）。总共有206209位用户，其中131209位用户最后一次购买的商品作为训练集，预测另外75000位用户下一单会购买的商品。</p>
+<p><img src="\img\prior_train_test.png" alt="DataUnderstanding"></p>
+<h1 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h1><h2 id="用户特征"><a href="#用户特征" class="headerlink" title="用户特征"></a>用户特征</h2><ol>
+<li>用户order数</li>
+<li>用户order起始 days since prior order总和</li>
+<li>用户平均days since prior order</li>
+<li>用户中间days since prior order</li>
+<li>用户购买总商品数 </li>
+<li>用户购买unique商品数 </li>
+<li>用户reorder比例 (用户reorder总数 / 用户购买总商品数)</li>
+</ol>
+<h2 id="商品特征"><a href="#商品特征" class="headerlink" title="商品特征"></a>商品特征</h2><ol>
+<li>商品平均reorder概率： 每个用户的reorder率取平均</li>
+<li>商品总的reorder数 </li>
+<li>商品总的order数 </li>
+<li>商品加购平均顺序 </li>
+<li>商品的reorder概率 </li>
+<li>商品购买unique用户人数</li>
+<li>商品reorder unique用户人数</li>
+</ol>
+<h2 id="用户商品特征"><a href="#用户商品特征" class="headerlink" title="用户商品特征"></a>用户商品特征</h2><ol>
+<li>用户-商品 order数量 </li>
+<li>用户-商品 最早order_number \ 最后order number </li>
+<li>用户-商品加购顺序平均值 \ 中间值 </li>
+<li>用户-商品距离上次购买时间平均值 \ 中间值 </li>
+<li>用户-商品购买时间（天）平均值 \ 中间值 </li>
+<li>用户-商品平均购买时间（小时）平均值 \ 中间值  </li>
+<li>用户-商品加入购物车位置间距（总购买数 - 商品加购位置）平均值 \ 中间值 </li>
+<li>用户-商品加入购物车位置比例（商品加购位置 / 总购买数）平均值 \ 中间值 </li>
+<li>用户-商品reorder总数</li>
+<li>用户-商品reorder比例:（用户-商品reorder总数 +１）/ 用户order数量</li>
+<li>用户-商品order比例: 用户-商品order数 / 用户总的order数</li>
+<li>用户-商品距离上一单的距离  用户order总数 - 用户-商品最后order</li>
+<li>用户-商品order率除去第一单 （用户总order数 / （用户order数 - 用户最早order _num + 1) </li>
+</ol>
+<h2 id="用户部门特征"><a href="#用户部门特征" class="headerlink" title="用户部门特征"></a>用户部门特征</h2><ol>
+<li>用户-部门 unique商品数</li>
+<li>用户-部门 reorder商品数</li>
+</ol>
+<h2 id="用户通道特征"><a href="#用户通道特征" class="headerlink" title="用户通道特征"></a>用户通道特征</h2><ol>
+<li>用户-部门 unique商品数</li>
+<li>用户-部门 reorder商品数</li>
+</ol>
+<h2 id="时间特征"><a href="#时间特征" class="headerlink" title="时间特征"></a>时间特征</h2><ol>
+<li>上一次购买距离这次时间差 </li>
+<li>上上次购买距离这次时间差 </li>
+<li>上上上次购买距离时间差 </li>
+<li>时间差的中位数 </li>
+<li>时间差平均值 </li>
+</ol>
+<h2 id="类别特征"><a href="#类别特征" class="headerlink" title="类别特征"></a>类别特征</h2><p>部门和通道类别特征，直接采用lightGBM的Categorical Feature</p>
+<h1 id="模型设计"><a href="#模型设计" class="headerlink" title="模型设计"></a>模型设计</h1><p>基于以上特征，进行模型设计。 模型直接是用的是LightGBM（Kaggle上有人说LightGBM训练下来表现比xgboost好）。<br>设定阈值为0.21（固定阈值表现最好），高于0.21的商品标记为购买，将没有购买任何商品的用户标记为”None”。这个策略最后我测试出来最好的LB结果是0.3878961。进一步的采用Faron给出的F1优化方法（F1优化方法会写在下一篇博客中），LB的结果可以马上提升到0.4以上。然后我在做F1优化的时候，提前做了一补简单的None的处理（也会在下一篇博客中提到），有了微小的提升，最后的LB的public是0.4051827（198）， private是0.4037739（145），最后还是有一部分人过拟合的比较厉害了，我应该还是比较幸运的，哈哈。在最后特征筛选的时候，我其实一直比较迷茫的。<br>我尝试过以下的方法：  </p>
+<ol>
+<li>去掉lightGBM的feature importance贡献最低的几个特征  </li>
+<li>查找与reorder的相关性高的特征，（但是相关性反应的只是线性关系，作用并不大）  </li>
+<li>去掉相关性很高的特征（比如相关性大于95%的特征，此类特征对模型不会太多贡献）  </li>
+<li>去掉一个（或多个）特征，查看CV会不会有波动<br>尝试的这些方法好像都作用并不大，或者我也没有意识到它们的作用（至少我发现了一两个负贡献的特征，还有一些特征构建的错误），但是总体来说我确实没有形成一种特征筛选的体系。</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这次比赛总体是比较仓促的，毕竟我是差不多结束前20天左右入的坑。和那些做了一两个月的人相比，确实还是有一些差距的，这个应该在特征筛选这一方面体现的尤其明显，我是一下子构建了很多特征直接测试的，与前面一点一点构建特征相比，虽然更加快速，但是对于特征对于模型的影响却没有很好的了解，最后特征纬度很大的时候，有点手足无措了，只能通过一些简单的方法进行一些评估，说到底还是经验和技术不够成熟，需要以后慢慢积累。不过总体来说，我对这次比赛很满意了，已经达到了我一开始做的预期目标。</p>
 
     
 
@@ -431,7 +557,7 @@
     <!-- 使用 changyan -->
 <div id="changyan-comment">
     <!--PC和WAP自适应版-->
-<div id="SOHUCS" sid="about/index.html"  ></div>
+<div id="SOHUCS" sid="2017/08/20/FirstKaggleSummary/"  ></div>
 <script type="text/javascript">
 (function(){
 var appid = 'cyt78gWUB';
@@ -455,11 +581,27 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
+        <a href="/2017/09/03/CommonDistribution/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
+    
+        <a href="/2017/07/16/BoostAlgorithm-AdaBoost/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
     
 </nav>
 
@@ -643,6 +785,14 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 

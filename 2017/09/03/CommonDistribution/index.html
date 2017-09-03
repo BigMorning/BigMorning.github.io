@@ -12,7 +12,7 @@
     
     <title>
         
-            about | 
+            常用分布函数 | 
         
         BigMorning&#39;s Blog
     </title>
@@ -38,7 +38,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="BigMorning">
     <meta name="description" itemprop="description" content="">
-    <meta name="keywords" content="null">
+    <meta name="keywords" content="null,数学,二项分布,多项分布,Gamma分布,Beta分布,Dirichlet Process">
 
     <!-- Site Verification -->
     
@@ -67,15 +67,18 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://yoursite.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="about | BigMorning&#39;s Blog">
+    <meta property="og:title" content="常用分布函数 | BigMorning&#39;s Blog">
     <meta property="og:image" content="/img/favicon.png" />
     <meta property="og:description" content="">
-    
+    <meta property="og:article:tag" content="数学"> <meta property="og:article:tag" content="二项分布"> <meta property="og:article:tag" content="多项分布"> <meta property="og:article:tag" content="Gamma分布"> <meta property="og:article:tag" content="Beta分布"> <meta property="og:article:tag" content="Dirichlet Process"> 
 
+    
+        <meta property="article:published_time" content="9月 03, 2017" />
+        <meta property="article:modified_time" content="9月 02, 2017" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="about | BigMorning&#39;s Blog">
+    <meta name="twitter:title" content="常用分布函数 | BigMorning&#39;s Blog">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
@@ -83,13 +86,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://yoursite.com/about/index.html" />
+        <link rel="canonical" href="http://yoursite.com/2017/09/03/CommonDistribution/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "BigMorning&#39;s Blog",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "BigMorning",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "一只大水货的奋斗路"
+    },
+    "headline": "常用分布函数",
+    "url": "http://yoursite.com/2017/09/03/CommonDistribution/index.html",
+    "datePublished": "9月 03, 2017",
+    "dateModified": "9月 02, 2017",
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
 
 
     
@@ -275,6 +308,43 @@
 
                     <!-- Post TOC -->
 
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二项分布"><span class="post-toc-number">1.</span> <span class="post-toc-text">二项分布</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多项分布"><span class="post-toc-number">2.</span> <span class="post-toc-text">多项分布</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Gamma分布"><span class="post-toc-number">3.</span> <span class="post-toc-text">Gamma分布</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Gamma函数"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Gamma函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Beta分布"><span class="post-toc-number">4.</span> <span class="post-toc-text">Beta分布</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Dirichlet-Process"><span class="post-toc-number">5.</span> <span class="post-toc-text">Dirichlet Process</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Dirichlet-分布函数"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">Dirichlet 分布函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#共轭关系"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">共轭关系</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Dirichlet-Process-1"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">Dirichlet Process</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#中国餐馆过程"><span class="post-toc-number">5.4.1.</span> <span class="post-toc-text">中国餐馆过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考"><span class="post-toc-number">5.5.</span> <span class="post-toc-text">参考</span></a></li></ol></li></ol>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+    
+
+
+
+
 
 <!-- Layouts -->
 
@@ -301,7 +371,7 @@
         
     
             <p class="article-headline-p">
-                about
+                常用分布函数
             </p>
         </div>
 
@@ -320,7 +390,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>BigMorning</strong>
-        <span>7月 14, 2017</span>
+        <span>9月 03, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -344,7 +414,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        
+        <a class="post_tag-link" href="/tags/Beta分布/">Beta分布</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Dirichlet-Process/">Dirichlet Process</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Gamma分布/">Gamma分布</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/二项分布/">二项分布</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/多项分布/">多项分布</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/数学/">数学</a>
     </ul>
     
 
@@ -360,7 +430,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=about&url=http://yoursite.com/about/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=常用分布函数&url=http://yoursite.com/2017/09/03/CommonDistribution/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -369,7 +439,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=about&url=http://yoursite.com/about/index.html&via=BigMorning" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=常用分布函数&url=http://yoursite.com/2017/09/03/CommonDistribution/index.html&via=BigMorning" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -378,7 +448,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/about/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/03/CommonDistribution/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -387,7 +457,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com/about/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/03/CommonDistribution/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -411,11 +481,105 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a><strong>关于我</strong></h1><hr>
-<blockquote>
-<p>BigMorning — 一只大水货</p>
-</blockquote>
-<p>宅男一只</p>
+        <p>这位是我的第一篇博客，我将做一些测试</p>
+<h1 id="二项分布"><a href="#二项分布" class="headerlink" title="二项分布"></a>二项分布</h1><p>二项分布就是重复n次伯努利试验。在试验中只有两种可能的结果，且这两种可能的结果对立且相互独立，与其它各次试验结果无关。在实验中结果为0或1的分布，叫做0-1分布。<br>如果随机变量$X$是参数为$n$和$p$的二项分布，记为$X \sim B(n,p)$。二项分布的概率分布函数为<br><span>$$\begin{equation}
+Pr(k;n,p) = Pr(X=k) = C_n^k p^k (1-p)^{n-k}
+\end{equation}$$</span><!-- Has MathJax --><br>均值为$np$, 方差为$np(1-p)$</p>
+<h1 id="多项分布"><a href="#多项分布" class="headerlink" title="多项分布"></a>多项分布</h1><p><strong>多项式分布是二项分布的推广</strong>。把二项分布公式的两个状态推广至多个状态，就得到了多项分布。<br>多项分布的概率分布函数是<br><span>$$\begin{aligned}
+f(\vec{x};n,\vec{p}) &amp;= \textrm{Pr}(X_1 = x_1 \ \textrm{and}\ ...\ \textrm{and} \ X_k = x_k)\\
+&amp;= \frac{n!}{x_1! ... x_k!}p_1^{x_1} \times ... \times p_k^{x_k}, when \ \sum_{i=1}^k x_i = n
+\end{aligned}$$</span><!-- Has MathJax --><br>概率分布函数可以用Gamma函数表示成<br><span>$$\begin{equation}
+f(\vec{x}, \vec{p}) = \frac{\Gamma(\sum_i x_i + 1)}{\prod_i \Gamma(x_i+1)} \prod_{i=1}^k p_i^{x_i}
+\end{equation}$$</span><!-- Has MathJax --><br>与Dirichlet分布的概率密度函数类似。</p>
+<h1 id="Gamma分布"><a href="#Gamma分布" class="headerlink" title="Gamma分布"></a>Gamma分布</h1><p><strong>Gamma分布即为多个独立同分布(i.i.d)的指数分布变量的合</strong>。<br>Gamma分布是二元参数连续概率分布。普通的指数分布和卡方分布都是Gamma分布的特殊形式。Gamma分布中的参数$\alpha$称为形状参数， $\beta$称为尺度参数，那么Gamma分布的随机变量可以表示为<br><span>$$\begin{equation}
+X \sim \Gamma(\alpha, \beta) = \textrm{Gamma}(\alpha, \beta)
+\end{equation}$$</span><!-- Has MathJax --><br>对应的概率密度函数可以表示为<br><span>$$\begin{equation}
+f(x;\alpha, \beta) = \frac{\beta^{\alpha}x^{\alpha-1}e^{-\beta x}}{\Gamma(\alpha)} \textrm{for}\quad x&gt;0 \ \textrm{and} \ \alpha,\beta &gt; 0
+\end{equation}$$</span><!-- Has MathJax --><br>$\Gamma(\alpha)$是Gamma函数。<br>Gamma分布的期望是$E(X) = \frac{\beta}{\alpha}$,方差是$\textrm{Var}(X) = \frac{\alpha}{\beta ^2 }$。</p>
+<h2 id="Gamma函数"><a href="#Gamma函数" class="headerlink" title="Gamma函数"></a>Gamma函数</h2><span>$$\begin{equation}
+\Gamma(\alpha) = \int_0^{\infty}t^{\alpha-1}e^{-t}dt
+\end{equation}$$</span><!-- Has MathJax -->
+<p>在Gamma分布中变量代换，令$t=\beta x$, 得<br><span>$$\begin{equation}
+\Gamma(\alpha, \beta) = \beta^{\alpha}\int_0^{\infty} x^{\alpha-1}e^{-x\beta}dx
+\end{equation}$$</span><!-- Has MathJax --><br>从而可得<br><span>$$\begin{equation}
+\frac{1}{\Gamma(\alpha, \beta)}\beta^{\alpha}\int_0^{\infty}x^{\alpha-1}e^{-x\beta}dx = 1
+\end{equation}$$</span><!-- Has MathJax --><br>由此可以得到Gamma分布的概率密度函数。</p>
+<h1 id="Beta分布"><a href="#Beta分布" class="headerlink" title="Beta分布"></a>Beta分布</h1><p><strong>note</strong>: 与Beta函数不同<br>Beta分布是定义在$[0,1]$上的连续概率分布，由两个参数正形状参数控制，记为$\alpha$和$\beta$</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Beta_distribution_pdf.svg/325px-Beta_distribution_pdf.svg.png" alt="image"></p>
+<span>$$\begin{equation}
+f(x;\alpha, \beta) = \textrm{constant} \cdot x^{\alpha - 1} (1-x)^{\beta - 1}=\frac{1}{B(\alpha, \beta)}x^{\alpha - 1}(1-x)^{\beta - 1}
+\end{equation}$$</span><!-- Has MathJax -->
+<p>Beta函数$B(\alpha,\beta)$:</p>
+<span>$$\begin{equation}
+    B(\alpha,\beta) = \int_0^1 t^{\alpha - 1} (1-t)^{\beta - 1} dt
+\end{equation}$$</span><!-- Has MathJax -->
+<p>Beta分布的均值是$E[X] = \frac{\alpha}{\alpha + \beta}$</p>
+<p>以扔硬币为例，抛5次硬币，正面朝上3次，反面朝上2次，估计正面朝上的概率。假设正面朝上的概率为$\theta$,那么似然概率可以表示为</p>
+<span>$$\begin{aligned}
+    f(\theta) = \theta^3 (1 - \theta)^2\\
+    f&apos;(\theta) = \theta^2 (5\theta^2 - 8\theta + 3)\\
+    \textrm{solution:} \theta = \frac{3}{5} (0\leq \theta \leq 1)
+    \end{aligned}$$</span><!-- Has MathJax -->
+<p>与观测的结果 $\theta = \frac{3}{5}$一致。<br>但是如果抛5次硬币，5次都是正面朝上，用极大似然估计获得的正面朝上的概率$\theta = 1$,明显不符合实际。</p>
+<p><strong>贝叶斯方法</strong><br>在估计$\theta$时，加上先验概率，即<br><span>$$\begin{equation}
+    p(\theta|X) = \frac{p(X|\theta)p(\theta)}{p(X)}
+\end{equation}$$</span><!-- Has MathJax --><br>$p(\theta)$是一个概率分布，这里直接给定为Beta(5,2),可以理解为在还没抛硬币之前我们就可以认为$\theta$接近0.8，而不可能是一个很大或很小的值。</p>
+<p><img src="\img\prior.jpg" alt="image"></p>
+<p>对于$p(X|\theta)$,即是二项分布，从5次中任意选3次正面朝上（最大似然概率没有用到二项分布是因为前面的排列数不影响后面$\theta$的单调性）<br><span>$$\begin{equation}
+    p(X|\theta) = C_5^2 \theta^3 (1-\theta)^2
+\end{equation}$$</span><!-- Has MathJax --><br>贝叶斯公式下的$P(X)$是标准化项，或者叫边缘概率(marginal probability),在离散概率的情况下，通过对所有可能的$\theta$求和得到。这里Beta分布为连续概率密度函数，需要通过对$[0,1]$内积分获得<br><span>$$\begin{equation}
+    p(X)= \int_0^1p(X|\theta)p(\theta)d\theta
+\end{equation}$$</span><!-- Has MathJax --><br>通过计算贝叶斯公式<br><span>$$\begin{aligned}
+    p(\theta|X) &amp;= \frac{p(X|\theta)p(\theta)}{p(X)}\\
+    &amp;= \frac{C_5^2\theta^3(1-\theta)^2\frac{1}{B(\alpha, \beta)}x^{\alpha - 1}(1-x)^{\beta - 1}}{\int_0^1 C_5^2\theta^3(1-\theta)^2\frac{1}{B(\alpha, \beta)}x^{\alpha - 1}(1-x)^{\beta - 1} d\theta}\\
+    &amp;=\textrm{Beta}(\theta|a+3, b+2)
+\end{aligned}$$</span><!-- Has MathJax --><br>观测前后，对于$\theta$的估计都是Beta分布，从图中可以看出，峰值从先验概率的0.8变为0.7，但是比通过极大似然估计的0.6要高。<br><img src="\img\posterior.jpg" alt="image"></p>
+<h1 id="Dirichlet-Process"><a href="#Dirichlet-Process" class="headerlink" title="Dirichlet Process"></a>Dirichlet Process</h1><h2 id="Dirichlet-分布函数"><a href="#Dirichlet-分布函数" class="headerlink" title="Dirichlet 分布函数"></a>Dirichlet 分布函数</h2><p>Dirichlet分布是定义在实数区间$[0,1]$上的概率度量函数，Dirichelet分布的值域是Bata分布拓展到高维的情形，其中的参数为一个$K$维向量$\vec{\alpha}$,那么概率密度函数为<br><span>$$\begin{equation}
+    f(\vec{x}, \vec{\alpha}) = \frac{1}{B(\alpha)}\prod_{i=1}^{K}x_i^{\alpha_i - 1}
+\end{equation}$$</span><!-- Has MathJax --><br>其中<br><span>$$\begin{equation}
+    \sum_{i=1}^{K}x_i = 1 \ \textrm{and}\ x_i \geq 0 \ \textrm{for all}\  i\in[1,K]
+\end{equation}$$</span><!-- Has MathJax --></p>
+<span>$$\begin{equation}
+    B(\alpha) = \frac{ \prod_{i=1}^K \Gamma(\alpha_i) }{\Gamma(\sum_{i=1}^K \alpha_i)}
+\end{equation}$$</span><!-- Has MathJax -->
+<p>$B(\alpha)$是表Gamma函数表示的多元Beta分布。<br>Dirichlet 分布函数的均值是$E[X_i] = \frac{\alpha_i}{\sum_k \alpha_k}$</p>
+<p>上面提到Beta分布可以作为二项分布的先验分布，Dirichlet分布可以作为多项式分布中参数向量的先验分布，多项式分布公式为<br><span>$$\begin{equation}
+    \textrm{Multi}(\vec{k}; n; \vec{p})=C_n^{\vec{k}}\prod_{i=1}^K\vec{p}_i^{\vec{k}_i}
+\end{equation}$$</span><!-- Has MathJax --></p>
+<h2 id="共轭关系"><a href="#共轭关系" class="headerlink" title="共轭关系"></a>共轭关系</h2><p>在Beta分布中，举的抛硬币的例子先验概率是Beta分布，似然概率是二项分布，最后得出的后验概率仍旧是二项分布，现在上升到一般的情况讨论。Bayes理论认为二项分布参数$p$并不是一个固定的值，而是一个未知的参数。因此，在求某个伯努利事件的时候，不能仅仅利用一个固定的概率$p$来计算，需要枚举所有可能取得的概率值，即<br><span>$$\begin{equation}
+    P(x;n,a,b) = \int_pB(x;n,p)Beta(p;a,b)dp
+\end{equation}$$</span><!-- Has MathJax --><br>上式表明：$p$并不只是在取某一个值的时候才能发生事件$x$,需要枚举所有可能发生事件$x$时的$p$，累加所有可能的$p$的概率$P(p)$及对应发生事件$x$时的概率乘积。在现实中，相比于$P(x)$，往往更关系$P(p|x)$(不关心已经发生的时间的概率，而关心在已经发生事实的前提下，再发生的概率)。那么根据贝叶斯公式，我们可以得到<br><span>$$\begin{equation}
+    P(p|x;n,a,b) = \frac{B(x;n,p)Beta(p;a,b)}{\int_{p^{&apos;}} B(x;n,p)Beta(p;a,b)dp^{&apos;}}
+\end{equation}$$</span><!-- Has MathJax --><br>此式表示的意思是：用某个特定的$p$计算事件$x$发生的概率（分子）除以所有可能的$p$发生事件$x$的累和（分母），上式可以推出得到<br><span>$$\begin{equation}
+    P(p|x;n,a,b) = Beta(p;a+x,b+n-x)
+\end{equation}$$</span><!-- Has MathJax --><br>其中$x$表示的是某个事件成功的次数，$n-x$表示的某个事件的失败的次数。上式表明当参数$p$先验概率满足Beta分布的时候，并且发生了一系列伯努利事件，则$p$的后验概率依旧满足Beta分布。Dirichlet分布与多项式分布也满足这样的关系，我们称这类关系为共轭关系。这类关系可以描述为</p>
+<p>先验分布（Beta/Dirichlet） +　数据事实（Binomial/Multinomial）= 后验分布（Beta/Dirichlet）</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>假设一篇文档$D$由$n$个不同单词组成，并且文档产生某个单词的概率符合Dirichlet分布$D \sim Dirichlet(\vec{a})$，我们想知道在已经观察到该文档的前提下，计算产生每个单词的概率(期望)$E[\vec{p}|D]$。<br>令$\vec{x}$为n维向量，每一为每一维代表对应单词在文档$D$中出现的次数，则：<br><span>$$\begin{equation}
+    P(\vec{p}|D) = Dir(\vec{\alpha} + \vec{x})
+\end{equation}$$</span><!-- Has MathJax --></p>
+<span>$$\begin{equation}
+    E[\vec{p} | D] = \frac{(\vec{\alpha} + \vec{x})}{\sum_{i=1}^n \vec{\alpha_i} + \vec{x}_i }
+\end{equation}$$</span><!-- Has MathJax -->
+<p>单词$i$发生的概率就是<br><span>$$\begin{equation}
+    \frac{(\vec{a_i} + \vec{x_i})}{\sum_{j=1}^n \vec{\alpha_j} + \vec{x}_j }
+\end{equation}$$</span><!-- Has MathJax --></p>
+<p>就是简单的伪计数所占的比例。如果$\vec{a}$不是向量，而是一个常数，则代表向量中的每一维均等于$\alpha$。此时，期望等于<br><span>$$\begin{equation}
+    E[\vec{p} | D] = \frac{(\alpha+ \vec{x})}{n\alpha + \sum_{i=1}^n \vec{x}_i }
+\end{equation}$$</span><!-- Has MathJax --></p>
+<h2 id="Dirichlet-Process-1"><a href="#Dirichlet-Process-1" class="headerlink" title="Dirichlet Process"></a>Dirichlet Process</h2><p> Dirichlet Process可以用来确定聚类的个数。<strong>Dirichlet Process(DP)</strong> 被称为分布的分布。从DP抽取出的每个样本（一个函数）都可以被认为是一个离散随机变量的分布函数，这个随机变量以非零概率值在可数无穷个离散点上取值。其实通俗来讲很简单。普通的dirichlet分布需要提供变量的维数K，比如topic个数，之后dirichlet分布表示的是各个概率分布的概率有多大。而Dirichlet process分布无需为之提供变量的维数，而是把变量维数变成一种随机变量，对于每一种K都提供对应的每一种概率分布的概率。如果只考虑Dirichlet process分布中K取某一个固定值的情况时，Dirichlet process与Dirichlet分布相同，因此，文献中总说，Dirichlet process是Dirichlet分布的一种无穷划分，换句话说，对Dirichlet process分布求出变量维数的边缘概率要符合Dirichlet分布。</p>
+<p> Dirichlet process是比较抽象的，我们很难通过定义理解其中的分布含义。那么，现实世界中有哪些例子，是符合Dirichlet process分布的呢？最经典的三个例子已经被人们广为流传：中国餐馆过程（Chinese Restaurant Process），罐子里抽球（Blackwell-MacQueen Urn Scheme）的过程，拆木棍（Stick-breaking）过程。由于中国餐馆过程与罐子里抽球的过程本质上是一致的，因此，本文主要讲中国餐馆过程和拆木棍过程。</p>
+<h3 id="中国餐馆过程"><a href="#中国餐馆过程" class="headerlink" title="中国餐馆过程"></a>中国餐馆过程</h3><p>中国餐馆过程算法如下：<br>刚开始的时候餐馆里没有人；<br>第一个客人坐到第1个桌子；<br>第n+1个客人有两种选择：</p>
+<p>DP的特性使得它在非参数贝叶斯聚类模型中可以被用作参数的先验分布。Dirichlet Process Mixture (DPM)是这种非参数贝叶斯聚类模型中的一个典型代表。DPM可以认为是有限混合（Finite Mixture，FM）模型的一个推广，FM（如Gaussian Mixture模型）必须首先给定类数，而DPM则不需要，它可以依据数据自行判断类数。理论上来说，DPM的类数随着log(样本点数量)的增长速度增长。目前研究者已经提出了很多训练DPM的算法，从Gibbs Sampling，到Collapsed Gibbs Sampling，到Variational方法。我自己实现了Collapsed Gibbs Sampling方法，速度是个很大的约束，跑大数据很费劲。DPM的一个另一个问题是它的类数由算法自动控制（虽然有个超参数alpha可以大致上调节类数），最终产生的类数可能与期望的差别很大。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://en.wikipedia.org/wiki/Binomial_distribution" target="_blank" rel="external">https://en.wikipedia.org/wiki/Binomial_distribution</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Multinomial_distribution" target="_blank" rel="external">https://en.wikipedia.org/wiki/Multinomial_distribution</a></li>
+<li><a href="http://maider.blog.sohu.com/306392863.html" target="_blank" rel="external">http://maider.blog.sohu.com/306392863.html</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Beta_distribution" target="_blank" rel="external">https://en.wikipedia.org/wiki/Beta_distribution</a></li>
+<li><a href="http://www.cnblogs.com/think-and-do/p/6593065.html" target="_blank" rel="external">http://www.cnblogs.com/think-and-do/p/6593065.html</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Gamma_distribution" target="_blank" rel="external">https://en.wikipedia.org/wiki/Gamma_distribution</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dirichlet_distribution" target="_blank" rel="external">https://en.wikipedia.org/wiki/Dirichlet_distribution</a></li>
+<li><a href="http://blog.csdn.net/yongheng5871/article/details/51405817" target="_blank" rel="external">http://blog.csdn.net/yongheng5871/article/details/51405817</a></li>
+</ol>
 
     
 
@@ -431,7 +595,7 @@
     <!-- 使用 changyan -->
 <div id="changyan-comment">
     <!--PC和WAP自适应版-->
-<div id="SOHUCS" sid="about/index.html"  ></div>
+<div id="SOHUCS" sid="2017/09/03/CommonDistribution/"  ></div>
 <script type="text/javascript">
 (function(){
 var appid = 'cyt78gWUB';
@@ -460,6 +624,14 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
+    
+        <a href="/2017/08/20/FirstKaggleSummary/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
     
 </nav>
 
@@ -643,6 +815,14 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 

@@ -37,7 +37,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="BigMorning">
-    <meta name="description" itemprop="description" content="">
+    <meta name="description" itemprop="description" content="简介Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。比如有一组Data，它训练得到一个弱学习器$G(x)$$$\begin{equation}
+ \mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}  
+\end{equation}$$假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么 $$\begin{equation}
+\epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i) 
+\end{equation}$$其中$I(x)$表示指示函数，即$$\begin{equation}
+I_{A} = \left\{
+\begin{aligned}
+&amp;amp;1, x \in A \\
+&amp;amp;0, x  \not\in A
+\end{aligned}
+\right.
+\end{equation}$$对于$\mathcal{D}$的初始弱分类器对与$(x_2,y_2)$分类出现错误，我们可以对这笔错误的$(x_2,y_2)$进行放大，比如重新调整$\mathcal{D}$的分布，得到$$\begin{equation}
+\mathcal{D_{1}} = \{(x_1,y_1), (x_2,y_2),(x_2,y_2),(x_4,y_4),\}
+\end{equation}$$对于重新生成的分不$\mathcal{D_1}$,可以引入权重$w$来体现每笔Data的重要性，那么$$\begin{aligned}
+\epsilon_i= &amp;amp;\sum_{i=1}^{4} w_i^{(m)} I(G(x_i) \neq y_i)  \\
+&amp;amp; (x_1, y_1), w_1 = \frac{1}{4}\\
+&amp;amp; (x_2, y_2), w_2 = \frac{2}{4}\\
+&amp;amp; (x_3, y_3), w_3 = 0\\
+&amp;amp; (x_4, y_4), w_4 = \frac{1}{4}
+\end{aligned}$$这样也可以保证每次训练出来的若非类器不同。常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。">
     <meta name="keywords" content="null,机器学习,Boosting,AdaBoost">
 
     <!-- Site Verification -->
@@ -69,17 +88,55 @@
     <meta property="og:type" content="blog">
     <meta property="og:title" content="Boosting算法——AdaBoost（1） | BigMorning&#39;s Blog">
     <meta property="og:image" content="/img/favicon.png" />
-    <meta property="og:description" content="">
+    <meta property="og:description" content="简介Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。比如有一组Data，它训练得到一个弱学习器$G(x)$$$\begin{equation}
+ \mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}  
+\end{equation}$$假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么 $$\begin{equation}
+\epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i) 
+\end{equation}$$其中$I(x)$表示指示函数，即$$\begin{equation}
+I_{A} = \left\{
+\begin{aligned}
+&amp;amp;1, x \in A \\
+&amp;amp;0, x  \not\in A
+\end{aligned}
+\right.
+\end{equation}$$对于$\mathcal{D}$的初始弱分类器对与$(x_2,y_2)$分类出现错误，我们可以对这笔错误的$(x_2,y_2)$进行放大，比如重新调整$\mathcal{D}$的分布，得到$$\begin{equation}
+\mathcal{D_{1}} = \{(x_1,y_1), (x_2,y_2),(x_2,y_2),(x_4,y_4),\}
+\end{equation}$$对于重新生成的分不$\mathcal{D_1}$,可以引入权重$w$来体现每笔Data的重要性，那么$$\begin{aligned}
+\epsilon_i= &amp;amp;\sum_{i=1}^{4} w_i^{(m)} I(G(x_i) \neq y_i)  \\
+&amp;amp; (x_1, y_1), w_1 = \frac{1}{4}\\
+&amp;amp; (x_2, y_2), w_2 = \frac{2}{4}\\
+&amp;amp; (x_3, y_3), w_3 = 0\\
+&amp;amp; (x_4, y_4), w_4 = \frac{1}{4}
+\end{aligned}$$这样也可以保证每次训练出来的若非类器不同。常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。">
     <meta property="og:article:tag" content="机器学习"> <meta property="og:article:tag" content="Boosting"> <meta property="og:article:tag" content="AdaBoost"> 
 
     
         <meta property="article:published_time" content="7月 16, 2017" />
-        <meta property="article:modified_time" content="7月 16, 2017" />
+        <meta property="article:modified_time" content="8月 20, 2017" />
     
 
     <!-- The Twitter Card protocol -->
     <meta name="twitter:title" content="Boosting算法——AdaBoost（1） | BigMorning&#39;s Blog">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="简介Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。比如有一组Data，它训练得到一个弱学习器$G(x)$$$\begin{equation}
+ \mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}  
+\end{equation}$$假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么 $$\begin{equation}
+\epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i) 
+\end{equation}$$其中$I(x)$表示指示函数，即$$\begin{equation}
+I_{A} = \left\{
+\begin{aligned}
+&amp;amp;1, x \in A \\
+&amp;amp;0, x  \not\in A
+\end{aligned}
+\right.
+\end{equation}$$对于$\mathcal{D}$的初始弱分类器对与$(x_2,y_2)$分类出现错误，我们可以对这笔错误的$(x_2,y_2)$进行放大，比如重新调整$\mathcal{D}$的分布，得到$$\begin{equation}
+\mathcal{D_{1}} = \{(x_1,y_1), (x_2,y_2),(x_2,y_2),(x_4,y_4),\}
+\end{equation}$$对于重新生成的分不$\mathcal{D_1}$,可以引入权重$w$来体现每笔Data的重要性，那么$$\begin{aligned}
+\epsilon_i= &amp;amp;\sum_{i=1}^{4} w_i^{(m)} I(G(x_i) \neq y_i)  \\
+&amp;amp; (x_1, y_1), w_1 = \frac{1}{4}\\
+&amp;amp; (x_2, y_2), w_2 = \frac{2}{4}\\
+&amp;amp; (x_3, y_3), w_3 = 0\\
+&amp;amp; (x_4, y_4), w_4 = \frac{1}{4}
+\end{aligned}$$这样也可以保证每次训练出来的若非类器不同。常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="http://yoursite.com" />
@@ -115,8 +172,27 @@
     "headline": "Boosting算法——AdaBoost（1）",
     "url": "http://yoursite.com/2017/07/16/BoostAlgorithm-AdaBoost/index.html",
     "datePublished": "7月 16, 2017",
-    "dateModified": "7月 16, 2017",
-    "description": "",
+    "dateModified": "8月 20, 2017",
+    "description": "简介Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。比如有一组Data，它训练得到一个弱学习器$G(x)$$$\begin{equation}
+ \mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}  
+\end{equation}$$假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么 $$\begin{equation}
+\epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i) 
+\end{equation}$$其中$I(x)$表示指示函数，即$$\begin{equation}
+I_{A} = \left\{
+\begin{aligned}
+&amp;amp;1, x \in A \\
+&amp;amp;0, x  \not\in A
+\end{aligned}
+\right.
+\end{equation}$$对于$\mathcal{D}$的初始弱分类器对与$(x_2,y_2)$分类出现错误，我们可以对这笔错误的$(x_2,y_2)$进行放大，比如重新调整$\mathcal{D}$的分布，得到$$\begin{equation}
+\mathcal{D_{1}} = \{(x_1,y_1), (x_2,y_2),(x_2,y_2),(x_4,y_4),\}
+\end{equation}$$对于重新生成的分不$\mathcal{D_1}$,可以引入权重$w$来体现每笔Data的重要性，那么$$\begin{aligned}
+\epsilon_i= &amp;amp;\sum_{i=1}^{4} w_i^{(m)} I(G(x_i) \neq y_i)  \\
+&amp;amp; (x_1, y_1), w_1 = \frac{1}{4}\\
+&amp;amp; (x_2, y_2), w_2 = \frac{2}{4}\\
+&amp;amp; (x_3, y_3), w_3 = 0\\
+&amp;amp; (x_4, y_4), w_4 = \frac{1}{4}
+\end{aligned}$$这样也可以保证每次训练出来的若非类器不同。常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://yoursite.com"
@@ -500,7 +576,7 @@ I_{A} = \left\{
 &amp; (x_2, y_2), w_2 = \frac{2}{4}\\
 &amp; (x_3, y_3), w_3 = 0\\
 &amp; (x_4, y_4), w_4 = \frac{1}{4}
-\end{aligned}$$</span><!-- Has MathJax --><br>这样也可以保证每次训练出来的若非类器不同。<br>常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。</p>
+\end{aligned}$$</span><!-- Has MathJax --><br>这样也可以保证每次训练出来的若非类器不同。<br>常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。<br><a id="more"></a></p>
 <h1 id="AdaBoost算法"><a href="#AdaBoost算法" class="headerlink" title="AdaBoost算法"></a>AdaBoost算法</h1><p>上面举了简单的例子， 现在拓展到一般的情况来得到AdaBoost算法。还是假设现有一笔Training Data，<br><span>$$\begin{equation}
 \mathcal{D} = \{(x_1,y_1), (x_2,y_2),...,(x_N,y_N)\} 
 \end{equation}$$</span><!-- Has MathJax --><br>其中$y_i \in \{-1, +1\}$.<br><span>$$\begin{equation}
@@ -703,6 +779,14 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
+        <a href="/2017/08/20/FirstKaggleSummary/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
@@ -801,7 +885,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
@@ -819,7 +903,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/机器学习/">机器学习<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活琐事/">生活琐事<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/数学/">数学<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/机器学习/">机器学习<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活琐事/">生活琐事<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -843,7 +927,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
         <li>
             <a href="/archives">
                 文章总数
-                <span class="sidebar-badge">2</span>
+                <span class="sidebar-badge">4</span>
             </a>
         </li>
         

@@ -3,6 +3,220 @@
   
     
     <entry>
+      <title><![CDATA[常用分布函数]]></title>
+      <url>/2017/09/03/CommonDistribution/</url>
+      <content type="html"><![CDATA[<p>这位是我的第一篇博客，我将做一些测试</p>
+<h1 id="二项分布"><a href="#二项分布" class="headerlink" title="二项分布"></a>二项分布</h1><p>二项分布就是重复n次伯努利试验。在试验中只有两种可能的结果，且这两种可能的结果对立且相互独立，与其它各次试验结果无关。在实验中结果为0或1的分布，叫做0-1分布。<br>如果随机变量$X$是参数为$n$和$p$的二项分布，记为$X \sim B(n,p)$。二项分布的概率分布函数为<br><span>$$\begin{equation}
+Pr(k;n,p) = Pr(X=k) = C_n^k p^k (1-p)^{n-k}
+\end{equation}$$</span><!-- Has MathJax --><br>均值为$np$, 方差为$np(1-p)$</p>
+<h1 id="多项分布"><a href="#多项分布" class="headerlink" title="多项分布"></a>多项分布</h1><p><strong>多项式分布是二项分布的推广</strong>。把二项分布公式的两个状态推广至多个状态，就得到了多项分布。<br>多项分布的概率分布函数是<br><span>$$\begin{aligned}
+f(\vec{x};n,\vec{p}) &amp;= \textrm{Pr}(X_1 = x_1 \ \textrm{and}\ ...\ \textrm{and} \ X_k = x_k)\\
+&amp;= \frac{n!}{x_1! ... x_k!}p_1^{x_1} \times ... \times p_k^{x_k}, when \ \sum_{i=1}^k x_i = n
+\end{aligned}$$</span><!-- Has MathJax --><br>概率分布函数可以用Gamma函数表示成<br><span>$$\begin{equation}
+f(\vec{x}, \vec{p}) = \frac{\Gamma(\sum_i x_i + 1)}{\prod_i \Gamma(x_i+1)} \prod_{i=1}^k p_i^{x_i}
+\end{equation}$$</span><!-- Has MathJax --><br>与Dirichlet分布的概率密度函数类似。</p>
+<h1 id="Gamma分布"><a href="#Gamma分布" class="headerlink" title="Gamma分布"></a>Gamma分布</h1><p><strong>Gamma分布即为多个独立同分布(i.i.d)的指数分布变量的合</strong>。<br>Gamma分布是二元参数连续概率分布。普通的指数分布和卡方分布都是Gamma分布的特殊形式。Gamma分布中的参数$\alpha$称为形状参数， $\beta$称为尺度参数，那么Gamma分布的随机变量可以表示为<br><span>$$\begin{equation}
+X \sim \Gamma(\alpha, \beta) = \textrm{Gamma}(\alpha, \beta)
+\end{equation}$$</span><!-- Has MathJax --><br>对应的概率密度函数可以表示为<br><span>$$\begin{equation}
+f(x;\alpha, \beta) = \frac{\beta^{\alpha}x^{\alpha-1}e^{-\beta x}}{\Gamma(\alpha)} \textrm{for}\quad x&gt;0 \ \textrm{and} \ \alpha,\beta &gt; 0
+\end{equation}$$</span><!-- Has MathJax --><br>$\Gamma(\alpha)$是Gamma函数。<br>Gamma分布的期望是$E(X) = \frac{\beta}{\alpha}$,方差是$\textrm{Var}(X) = \frac{\alpha}{\beta ^2 }$。</p>
+<h2 id="Gamma函数"><a href="#Gamma函数" class="headerlink" title="Gamma函数"></a>Gamma函数</h2><span>$$\begin{equation}
+\Gamma(\alpha) = \int_0^{\infty}t^{\alpha-1}e^{-t}dt
+\end{equation}$$</span><!-- Has MathJax -->
+<p>在Gamma分布中变量代换，令$t=\beta x$, 得<br><span>$$\begin{equation}
+\Gamma(\alpha, \beta) = \beta^{\alpha}\int_0^{\infty} x^{\alpha-1}e^{-x\beta}dx
+\end{equation}$$</span><!-- Has MathJax --><br>从而可得<br><span>$$\begin{equation}
+\frac{1}{\Gamma(\alpha, \beta)}\beta^{\alpha}\int_0^{\infty}x^{\alpha-1}e^{-x\beta}dx = 1
+\end{equation}$$</span><!-- Has MathJax --><br>由此可以得到Gamma分布的概率密度函数。</p>
+<h1 id="Beta分布"><a href="#Beta分布" class="headerlink" title="Beta分布"></a>Beta分布</h1><p><strong>note</strong>: 与Beta函数不同<br>Beta分布是定义在$[0,1]$上的连续概率分布，由两个参数正形状参数控制，记为$\alpha$和$\beta$</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Beta_distribution_pdf.svg/325px-Beta_distribution_pdf.svg.png" alt="image"></p>
+<span>$$\begin{equation}
+f(x;\alpha, \beta) = \textrm{constant} \cdot x^{\alpha - 1} (1-x)^{\beta - 1}=\frac{1}{B(\alpha, \beta)}x^{\alpha - 1}(1-x)^{\beta - 1}
+\end{equation}$$</span><!-- Has MathJax -->
+<p>Beta函数$B(\alpha,\beta)$:</p>
+<span>$$\begin{equation}
+    B(\alpha,\beta) = \int_0^1 t^{\alpha - 1} (1-t)^{\beta - 1} dt
+\end{equation}$$</span><!-- Has MathJax -->
+<p>Beta分布的均值是$E[X] = \frac{\alpha}{\alpha + \beta}$</p>
+<p>以扔硬币为例，抛5次硬币，正面朝上3次，反面朝上2次，估计正面朝上的概率。假设正面朝上的概率为$\theta$,那么似然概率可以表示为</p>
+<span>$$\begin{aligned}
+    f(\theta) = \theta^3 (1 - \theta)^2\\
+    f&apos;(\theta) = \theta^2 (5\theta^2 - 8\theta + 3)\\
+    \textrm{solution:} \theta = \frac{3}{5} (0\leq \theta \leq 1)
+    \end{aligned}$$</span><!-- Has MathJax -->
+<p>与观测的结果 $\theta = \frac{3}{5}$一致。<br>但是如果抛5次硬币，5次都是正面朝上，用极大似然估计获得的正面朝上的概率$\theta = 1$,明显不符合实际。</p>
+<p><strong>贝叶斯方法</strong><br>在估计$\theta$时，加上先验概率，即<br><span>$$\begin{equation}
+    p(\theta|X) = \frac{p(X|\theta)p(\theta)}{p(X)}
+\end{equation}$$</span><!-- Has MathJax --><br>$p(\theta)$是一个概率分布，这里直接给定为Beta(5,2),可以理解为在还没抛硬币之前我们就可以认为$\theta$接近0.8，而不可能是一个很大或很小的值。</p>
+<p><img src="\img\prior.jpg" alt="image"></p>
+<p>对于$p(X|\theta)$,即是二项分布，从5次中任意选3次正面朝上（最大似然概率没有用到二项分布是因为前面的排列数不影响后面$\theta$的单调性）<br><span>$$\begin{equation}
+    p(X|\theta) = C_5^2 \theta^3 (1-\theta)^2
+\end{equation}$$</span><!-- Has MathJax --><br>贝叶斯公式下的$P(X)$是标准化项，或者叫边缘概率(marginal probability),在离散概率的情况下，通过对所有可能的$\theta$求和得到。这里Beta分布为连续概率密度函数，需要通过对$[0,1]$内积分获得<br><span>$$\begin{equation}
+    p(X)= \int_0^1p(X|\theta)p(\theta)d\theta
+\end{equation}$$</span><!-- Has MathJax --><br>通过计算贝叶斯公式<br><span>$$\begin{aligned}
+    p(\theta|X) &amp;= \frac{p(X|\theta)p(\theta)}{p(X)}\\
+    &amp;= \frac{C_5^2\theta^3(1-\theta)^2\frac{1}{B(\alpha, \beta)}x^{\alpha - 1}(1-x)^{\beta - 1}}{\int_0^1 C_5^2\theta^3(1-\theta)^2\frac{1}{B(\alpha, \beta)}x^{\alpha - 1}(1-x)^{\beta - 1} d\theta}\\
+    &amp;=\textrm{Beta}(\theta|a+3, b+2)
+\end{aligned}$$</span><!-- Has MathJax --><br>观测前后，对于$\theta$的估计都是Beta分布，从图中可以看出，峰值从先验概率的0.8变为0.7，但是比通过极大似然估计的0.6要高。<br><img src="\img\posterior.jpg" alt="image"></p>
+<h1 id="Dirichlet-Process"><a href="#Dirichlet-Process" class="headerlink" title="Dirichlet Process"></a>Dirichlet Process</h1><h2 id="Dirichlet-分布函数"><a href="#Dirichlet-分布函数" class="headerlink" title="Dirichlet 分布函数"></a>Dirichlet 分布函数</h2><p>Dirichlet分布是定义在实数区间$[0,1]$上的概率度量函数，Dirichelet分布的值域是Bata分布拓展到高维的情形，其中的参数为一个$K$维向量$\vec{\alpha}$,那么概率密度函数为<br><span>$$\begin{equation}
+    f(\vec{x}, \vec{\alpha}) = \frac{1}{B(\alpha)}\prod_{i=1}^{K}x_i^{\alpha_i - 1}
+\end{equation}$$</span><!-- Has MathJax --><br>其中<br><span>$$\begin{equation}
+    \sum_{i=1}^{K}x_i = 1 \ \textrm{and}\ x_i \geq 0 \ \textrm{for all}\  i\in[1,K]
+\end{equation}$$</span><!-- Has MathJax --></p>
+<span>$$\begin{equation}
+    B(\alpha) = \frac{ \prod_{i=1}^K \Gamma(\alpha_i) }{\Gamma(\sum_{i=1}^K \alpha_i)}
+\end{equation}$$</span><!-- Has MathJax -->
+<p>$B(\alpha)$是表Gamma函数表示的多元Beta分布。<br>Dirichlet 分布函数的均值是$E[X_i] = \frac{\alpha_i}{\sum_k \alpha_k}$</p>
+<p>上面提到Beta分布可以作为二项分布的先验分布，Dirichlet分布可以作为多项式分布中参数向量的先验分布，多项式分布公式为<br><span>$$\begin{equation}
+    \textrm{Multi}(\vec{k}; n; \vec{p})=C_n^{\vec{k}}\prod_{i=1}^K\vec{p}_i^{\vec{k}_i}
+\end{equation}$$</span><!-- Has MathJax --></p>
+<h2 id="共轭关系"><a href="#共轭关系" class="headerlink" title="共轭关系"></a>共轭关系</h2><p>在Beta分布中，举的抛硬币的例子先验概率是Beta分布，似然概率是二项分布，最后得出的后验概率仍旧是二项分布，现在上升到一般的情况讨论。Bayes理论认为二项分布参数$p$并不是一个固定的值，而是一个未知的参数。因此，在求某个伯努利事件的时候，不能仅仅利用一个固定的概率$p$来计算，需要枚举所有可能取得的概率值，即<br><span>$$\begin{equation}
+    P(x;n,a,b) = \int_pB(x;n,p)Beta(p;a,b)dp
+\end{equation}$$</span><!-- Has MathJax --><br>上式表明：$p$并不只是在取某一个值的时候才能发生事件$x$,需要枚举所有可能发生事件$x$时的$p$，累加所有可能的$p$的概率$P(p)$及对应发生事件$x$时的概率乘积。在现实中，相比于$P(x)$，往往更关系$P(p|x)$(不关心已经发生的时间的概率，而关心在已经发生事实的前提下，再发生的概率)。那么根据贝叶斯公式，我们可以得到<br><span>$$\begin{equation}
+    P(p|x;n,a,b) = \frac{B(x;n,p)Beta(p;a,b)}{\int_{p^{&apos;}} B(x;n,p)Beta(p;a,b)dp^{&apos;}}
+\end{equation}$$</span><!-- Has MathJax --><br>此式表示的意思是：用某个特定的$p$计算事件$x$发生的概率（分子）除以所有可能的$p$发生事件$x$的累和（分母），上式可以推出得到<br><span>$$\begin{equation}
+    P(p|x;n,a,b) = Beta(p;a+x,b+n-x)
+\end{equation}$$</span><!-- Has MathJax --><br>其中$x$表示的是某个事件成功的次数，$n-x$表示的某个事件的失败的次数。上式表明当参数$p$先验概率满足Beta分布的时候，并且发生了一系列伯努利事件，则$p$的后验概率依旧满足Beta分布。Dirichlet分布与多项式分布也满足这样的关系，我们称这类关系为共轭关系。这类关系可以描述为</p>
+<p>先验分布（Beta/Dirichlet） +　数据事实（Binomial/Multinomial）= 后验分布（Beta/Dirichlet）</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>假设一篇文档$D$由$n$个不同单词组成，并且文档产生某个单词的概率符合Dirichlet分布$D \sim Dirichlet(\vec{a})$，我们想知道在已经观察到该文档的前提下，计算产生每个单词的概率(期望)$E[\vec{p}|D]$。<br>令$\vec{x}$为n维向量，每一为每一维代表对应单词在文档$D$中出现的次数，则：<br><span>$$\begin{equation}
+    P(\vec{p}|D) = Dir(\vec{\alpha} + \vec{x})
+\end{equation}$$</span><!-- Has MathJax --></p>
+<span>$$\begin{equation}
+    E[\vec{p} | D] = \frac{(\vec{\alpha} + \vec{x})}{\sum_{i=1}^n \vec{\alpha_i} + \vec{x}_i }
+\end{equation}$$</span><!-- Has MathJax -->
+<p>单词$i$发生的概率就是<br><span>$$\begin{equation}
+    \frac{(\vec{a_i} + \vec{x_i})}{\sum_{j=1}^n \vec{\alpha_j} + \vec{x}_j }
+\end{equation}$$</span><!-- Has MathJax --></p>
+<p>就是简单的伪计数所占的比例。如果$\vec{a}$不是向量，而是一个常数，则代表向量中的每一维均等于$\alpha$。此时，期望等于<br><span>$$\begin{equation}
+    E[\vec{p} | D] = \frac{(\alpha+ \vec{x})}{n\alpha + \sum_{i=1}^n \vec{x}_i }
+\end{equation}$$</span><!-- Has MathJax --></p>
+<h2 id="Dirichlet-Process-1"><a href="#Dirichlet-Process-1" class="headerlink" title="Dirichlet Process"></a>Dirichlet Process</h2><p> Dirichlet Process可以用来确定聚类的个数。<strong>Dirichlet Process(DP)</strong> 被称为分布的分布。从DP抽取出的每个样本（一个函数）都可以被认为是一个离散随机变量的分布函数，这个随机变量以非零概率值在可数无穷个离散点上取值。其实通俗来讲很简单。普通的dirichlet分布需要提供变量的维数K，比如topic个数，之后dirichlet分布表示的是各个概率分布的概率有多大。而Dirichlet process分布无需为之提供变量的维数，而是把变量维数变成一种随机变量，对于每一种K都提供对应的每一种概率分布的概率。如果只考虑Dirichlet process分布中K取某一个固定值的情况时，Dirichlet process与Dirichlet分布相同，因此，文献中总说，Dirichlet process是Dirichlet分布的一种无穷划分，换句话说，对Dirichlet process分布求出变量维数的边缘概率要符合Dirichlet分布。</p>
+<p> Dirichlet process是比较抽象的，我们很难通过定义理解其中的分布含义。那么，现实世界中有哪些例子，是符合Dirichlet process分布的呢？最经典的三个例子已经被人们广为流传：中国餐馆过程（Chinese Restaurant Process），罐子里抽球（Blackwell-MacQueen Urn Scheme）的过程，拆木棍（Stick-breaking）过程。由于中国餐馆过程与罐子里抽球的过程本质上是一致的，因此，本文主要讲中国餐馆过程和拆木棍过程。</p>
+<h3 id="中国餐馆过程"><a href="#中国餐馆过程" class="headerlink" title="中国餐馆过程"></a>中国餐馆过程</h3><p>中国餐馆过程算法如下：<br>刚开始的时候餐馆里没有人；<br>第一个客人坐到第1个桌子；<br>第n+1个客人有两种选择：</p>
+<p>DP的特性使得它在非参数贝叶斯聚类模型中可以被用作参数的先验分布。Dirichlet Process Mixture (DPM)是这种非参数贝叶斯聚类模型中的一个典型代表。DPM可以认为是有限混合（Finite Mixture，FM）模型的一个推广，FM（如Gaussian Mixture模型）必须首先给定类数，而DPM则不需要，它可以依据数据自行判断类数。理论上来说，DPM的类数随着log(样本点数量)的增长速度增长。目前研究者已经提出了很多训练DPM的算法，从Gibbs Sampling，到Collapsed Gibbs Sampling，到Variational方法。我自己实现了Collapsed Gibbs Sampling方法，速度是个很大的约束，跑大数据很费劲。DPM的一个另一个问题是它的类数由算法自动控制（虽然有个超参数alpha可以大致上调节类数），最终产生的类数可能与期望的差别很大。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://en.wikipedia.org/wiki/Binomial_distribution" target="_blank" rel="external">https://en.wikipedia.org/wiki/Binomial_distribution</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Multinomial_distribution" target="_blank" rel="external">https://en.wikipedia.org/wiki/Multinomial_distribution</a></li>
+<li><a href="http://maider.blog.sohu.com/306392863.html" target="_blank" rel="external">http://maider.blog.sohu.com/306392863.html</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Beta_distribution" target="_blank" rel="external">https://en.wikipedia.org/wiki/Beta_distribution</a></li>
+<li><a href="http://www.cnblogs.com/think-and-do/p/6593065.html" target="_blank" rel="external">http://www.cnblogs.com/think-and-do/p/6593065.html</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Gamma_distribution" target="_blank" rel="external">https://en.wikipedia.org/wiki/Gamma_distribution</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dirichlet_distribution" target="_blank" rel="external">https://en.wikipedia.org/wiki/Dirichlet_distribution</a></li>
+<li><a href="http://blog.csdn.net/yongheng5871/article/details/51405817" target="_blank" rel="external">http://blog.csdn.net/yongheng5871/article/details/51405817</a></li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> 数学 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 数学 </tag>
+            
+            <tag> 二项分布 </tag>
+            
+            <tag> 多项分布 </tag>
+            
+            <tag> Gamma分布 </tag>
+            
+            <tag> Beta分布 </tag>
+            
+            <tag> Dirichlet Process </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[第一次kaggle经历]]></title>
+      <url>/2017/08/20/FirstKaggleSummary/</url>
+      <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>最近真是折腾死了，本来之前想着每个礼拜都更新博客的，但是继上次参加了京东的JData比赛之后，一直想再做一次数据挖掘的比赛，于是就发现了这次的Instacart Market Basket Analysis的比赛，入坑比较晚了，比赛差不多还有一个月就快结束了，再加上后面浪了好几天，真正开始好好做的时候，还剩下差不多20天左右了，更坑爹的是离比赛结束还有3、4天左右，实验室断网了！！！最后7天LB变动特别大，由于实验室断网，没有办法连上服务器，没有跟上LB的节奏，最后取得了 145名（top 6%），感觉很可惜但是想想也知足了,也对得起我最后熬了一夜了，哈哈。毕竟Kaggle上藏龙卧虎，随便看看排名靠前的人的介绍，有Kaggle排名靠前的expert，世界名校的研究生，知名公司的数据科学家，看着好自卑。。。但是也正是因为有这些人在Kaggle上的讨论和分享，每一次感到迷茫不知道前进方向在哪的时候，逛一逛Kaggle的Discussion总是能有新的发现。在比赛期间，每天早上到实验室总会线上Kaggle的Discussion逛一逛，围观大牛们的经验分享、灵感交流、吐槽， 也是别有一番风味的。<br>这次比赛是通过Instacart之前的购买记录来预测用户下一单重复购买产品，与我之前做的JData的比赛有一些相似，都是购买预测的类型，不同的是JData是通过用户与商品的交互来预测用户会下单的商品，而这次是用户的购买记录预测下一单会重复购买的商品，不过两个比赛有确实有很多相似的特征。</p>
+<h1 id="数据探索"><a href="#数据探索" class="headerlink" title="数据探索"></a>数据探索</h1><p>因为比赛加入的晚，所以EDA这一块很多都是借鉴Kernel上的分享，非常感谢Kernel的各位大牛的分享。<br>这次比赛一共给了7个csv文件，分别是order products prior, order products train, orders, products, aisles, departments和 样本提交文件sample submission。数据之间的关系如下图所示<br><img src="\img\instacartFiles.png" alt="DataUnderstanding"></p>
+<p>数据集划分为prior，train，test；从prior中提取特征，train作为训练，test预测（Kaggle上也有人说prior+train提取特征会有一点提升，我没有尝试）。总共有206209位用户，其中131209位用户最后一次购买的商品作为训练集，预测另外75000位用户下一单会购买的商品。</p>
+<p><img src="\img\prior_train_test.png" alt="DataUnderstanding"></p>
+<h1 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h1><h2 id="用户特征"><a href="#用户特征" class="headerlink" title="用户特征"></a>用户特征</h2><ol>
+<li>用户order数</li>
+<li>用户order起始 days since prior order总和</li>
+<li>用户平均days since prior order</li>
+<li>用户中间days since prior order</li>
+<li>用户购买总商品数 </li>
+<li>用户购买unique商品数 </li>
+<li>用户reorder比例 (用户reorder总数 / 用户购买总商品数)</li>
+</ol>
+<h2 id="商品特征"><a href="#商品特征" class="headerlink" title="商品特征"></a>商品特征</h2><ol>
+<li>商品平均reorder概率： 每个用户的reorder率取平均</li>
+<li>商品总的reorder数 </li>
+<li>商品总的order数 </li>
+<li>商品加购平均顺序 </li>
+<li>商品的reorder概率 </li>
+<li>商品购买unique用户人数</li>
+<li>商品reorder unique用户人数</li>
+</ol>
+<h2 id="用户商品特征"><a href="#用户商品特征" class="headerlink" title="用户商品特征"></a>用户商品特征</h2><ol>
+<li>用户-商品 order数量 </li>
+<li>用户-商品 最早order_number \ 最后order number </li>
+<li>用户-商品加购顺序平均值 \ 中间值 </li>
+<li>用户-商品距离上次购买时间平均值 \ 中间值 </li>
+<li>用户-商品购买时间（天）平均值 \ 中间值 </li>
+<li>用户-商品平均购买时间（小时）平均值 \ 中间值  </li>
+<li>用户-商品加入购物车位置间距（总购买数 - 商品加购位置）平均值 \ 中间值 </li>
+<li>用户-商品加入购物车位置比例（商品加购位置 / 总购买数）平均值 \ 中间值 </li>
+<li>用户-商品reorder总数</li>
+<li>用户-商品reorder比例:（用户-商品reorder总数 +１）/ 用户order数量</li>
+<li>用户-商品order比例: 用户-商品order数 / 用户总的order数</li>
+<li>用户-商品距离上一单的距离  用户order总数 - 用户-商品最后order</li>
+<li>用户-商品order率除去第一单 （用户总order数 / （用户order数 - 用户最早order _num + 1) </li>
+</ol>
+<h2 id="用户部门特征"><a href="#用户部门特征" class="headerlink" title="用户部门特征"></a>用户部门特征</h2><ol>
+<li>用户-部门 unique商品数</li>
+<li>用户-部门 reorder商品数</li>
+</ol>
+<h2 id="用户通道特征"><a href="#用户通道特征" class="headerlink" title="用户通道特征"></a>用户通道特征</h2><ol>
+<li>用户-部门 unique商品数</li>
+<li>用户-部门 reorder商品数</li>
+</ol>
+<h2 id="时间特征"><a href="#时间特征" class="headerlink" title="时间特征"></a>时间特征</h2><ol>
+<li>上一次购买距离这次时间差 </li>
+<li>上上次购买距离这次时间差 </li>
+<li>上上上次购买距离时间差 </li>
+<li>时间差的中位数 </li>
+<li>时间差平均值 </li>
+</ol>
+<h2 id="类别特征"><a href="#类别特征" class="headerlink" title="类别特征"></a>类别特征</h2><p>部门和通道类别特征，直接采用lightGBM的Categorical Feature</p>
+<h1 id="模型设计"><a href="#模型设计" class="headerlink" title="模型设计"></a>模型设计</h1><p>基于以上特征，进行模型设计。 模型直接是用的是LightGBM（Kaggle上有人说LightGBM训练下来表现比xgboost好）。<br>设定阈值为0.21（固定阈值表现最好），高于0.21的商品标记为购买，将没有购买任何商品的用户标记为”None”。这个策略最后我测试出来最好的LB结果是0.3878961。进一步的采用Faron给出的F1优化方法（F1优化方法会写在下一篇博客中），LB的结果可以马上提升到0.4以上。然后我在做F1优化的时候，提前做了一补简单的None的处理（也会在下一篇博客中提到），有了微小的提升，最后的LB的public是0.4051827（198）， private是0.4037739（145），最后还是有一部分人过拟合的比较厉害了，我应该还是比较幸运的，哈哈。在最后特征筛选的时候，我其实一直比较迷茫的。<br>我尝试过以下的方法：  </p>
+<ol>
+<li>去掉lightGBM的feature importance贡献最低的几个特征  </li>
+<li>查找与reorder的相关性高的特征，（但是相关性反应的只是线性关系，作用并不大）  </li>
+<li>去掉相关性很高的特征（比如相关性大于95%的特征，此类特征对模型不会太多贡献）  </li>
+<li>去掉一个（或多个）特征，查看CV会不会有波动<br>尝试的这些方法好像都作用并不大，或者我也没有意识到它们的作用（至少我发现了一两个负贡献的特征，还有一些特征构建的错误），但是总体来说我确实没有形成一种特征筛选的体系。</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这次比赛总体是比较仓促的，毕竟我是差不多结束前20天左右入的坑。和那些做了一两个月的人相比，确实还是有一些差距的，这个应该在特征筛选这一方面体现的尤其明显，我是一下子构建了很多特征直接测试的，与前面一点一点构建特征相比，虽然更加快速，但是对于特征对于模型的影响却没有很好的了解，最后特征纬度很大的时候，有点手足无措了，只能通过一些简单的方法进行一些评估，说到底还是经验和技术不够成熟，需要以后慢慢积累。不过总体来说，我对这次比赛很满意了，已经达到了我一开始做的预期目标。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> kaggle </tag>
+            
+            <tag> 机器学习 </tag>
+            
+            <tag> 总结 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Boosting算法——AdaBoost（1）]]></title>
       <url>/2017/07/16/BoostAlgorithm-AdaBoost/</url>
       <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。<br>比如有一组Data，它训练得到一个弱学习器$G(x)$<br><span>$$\begin{equation}
@@ -24,7 +238,7 @@ I_{A} = \left\{
 &amp; (x_2, y_2), w_2 = \frac{2}{4}\\
 &amp; (x_3, y_3), w_3 = 0\\
 &amp; (x_4, y_4), w_4 = \frac{1}{4}
-\end{aligned}$$</span><!-- Has MathJax --><br>这样也可以保证每次训练出来的若非类器不同。<br>常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。</p>
+\end{aligned}$$</span><!-- Has MathJax --><br>这样也可以保证每次训练出来的若非类器不同。<br>常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。<br><a id="more"></a></p>
 <h1 id="AdaBoost算法"><a href="#AdaBoost算法" class="headerlink" title="AdaBoost算法"></a>AdaBoost算法</h1><p>上面举了简单的例子， 现在拓展到一般的情况来得到AdaBoost算法。还是假设现有一笔Training Data，<br><span>$$\begin{equation}
 \mathcal{D} = \{(x_1,y_1), (x_2,y_2),...,(x_N,y_N)\} 
 \end{equation}$$</span><!-- Has MathJax --><br>其中$y_i \in \{-1, +1\}$.<br><span>$$\begin{equation}
