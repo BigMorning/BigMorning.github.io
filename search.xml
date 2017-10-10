@@ -51,7 +51,9 @@ g(z)_i =\max_{j\in G^{(i)}}(z_j)
             
             <tag> 前馈网络 </tag>
             
-            <tag> 隐藏层， 反向传播 </tag>
+            <tag> 隐藏层 </tag>
+            
+            <tag> 反向传播 </tag>
             
         </tags>
         
