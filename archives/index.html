@@ -296,6 +296,71 @@
     
 
         <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/09/10/deepfeedforward/">深度学习读书笔记（1）————深度前馈网络</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            深度前馈网络（deep feedforward network），也叫做前馈神经网络（feedforward neural network）或者多层...
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/09/10/deepfeedforward/" target="_self">阅读全文</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="BigMorning's avatar">
+            </div>
+            <div>
+                <strong>BigMorning</strong>
+                <span>9月 10, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                <a class="post_category-link" href="/categories/深度学习/">深度学习</a>
+            </span>
+
+            
+
+            
+                <!-- Comment Number -->
+                &nbsp;|&nbsp;
+                <span class="post_entry-comment" >
+                        <span id = "sourceId::2017/09/10/deepfeedforward/" class = "cy_cmt_count" ></span>条评论
+                </span>
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+            
+            
+        
+    
+        
+            
+                <!-- Paradox Thumbnail -->
+                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+        
+    
+
+        <!-- Post Title -->
         <p class="article-headline-p"><a href="/2017/09/03/CommonDistribution/">常用分布函数</a></p>
     </div>
 
@@ -433,26 +498,7 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-            简介Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。比如有一组Data，它训练得到一个弱学习器$G(x)$$$\begin{equation}
- \mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}  
-\end{equation}$$假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么 $$\begin{equation}
-\epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i) 
-\end{equation}$$其中$I(x)$表示指示函数，即$$\begin{equation}
-I_{A} = \left\{
-\begin{aligned}
-&amp;1, x \in A \\
-&amp;0, x  \not\in A
-\end{aligned}
-\right.
-\end{equation}$$对于$\mathcal{D}$的初始弱分类器对与$(x_2,y_2)$分类出现错误，我们可以对这笔错误的$(x_2,y_2)$进行放大，比如重新调整$\mathcal{D}$的分布，得到$$\begin{equation}
-\mathcal{D_{1}} = \{(x_1,y_1), (x_2,y_2),(x_2,y_2),(x_4,y_4),\}
-\end{equation}$$对于重新生成的分不$\mathcal{D_1}$,可以引入权重$w$来体现每笔Data的重要性，那么$$\begin{aligned}
-\epsilon_i= &amp;\sum_{i=1}^{4} w_i^{(m)} I(G(x_i) \neq y_i)  \\
-&amp; (x_1, y_1), w_1 = \frac{1}{4}\\
-&amp; (x_2, y_2), w_2 = \frac{2}{4}\\
-&amp; (x_3, y_3), w_3 = 0\\
-&amp; (x_4, y_4), w_4 = \frac{1}{4}
-\end{aligned}$$这样也可以保证每次训练出来的若非类器不同。常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。
+            简介Boostin...
         
         &nbsp;&nbsp;&nbsp;
         <span>
@@ -615,7 +661,7 @@ I_{A} = \left\{
 
     <!-- Sidebar Email -->
     <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-        chjcj6565122@163.com
+        chjcj86565122@163.com
         <b class="caret"></b>
     </a>
 </div>
@@ -664,7 +710,7 @@ I_{A} = \left\{
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
@@ -682,7 +728,7 @@ I_{A} = \left\{
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/数学/">数学<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/机器学习/">机器学习<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活琐事/">生活琐事<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/数学/">数学<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/机器学习/">机器学习<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/深度学习/">深度学习<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活琐事/">生活琐事<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -706,7 +752,7 @@ I_{A} = \left\{
         <li>
             <a href="/archives">
                 文章总数
-                <span class="sidebar-badge">4</span>
+                <span class="sidebar-badge">5</span>
             </a>
         </li>
         

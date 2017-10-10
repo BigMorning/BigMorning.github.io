@@ -37,26 +37,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="BigMorning">
-    <meta name="description" itemprop="description" content="简介Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。比如有一组Data，它训练得到一个弱学习器$G(x)$$$\begin{equation}
- \mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}  
-\end{equation}$$假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么 $$\begin{equation}
-\epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i) 
-\end{equation}$$其中$I(x)$表示指示函数，即$$\begin{equation}
-I_{A} = \left\{
-\begin{aligned}
-&amp;amp;1, x \in A \\
-&amp;amp;0, x  \not\in A
-\end{aligned}
-\right.
-\end{equation}$$对于$\mathcal{D}$的初始弱分类器对与$(x_2,y_2)$分类出现错误，我们可以对这笔错误的$(x_2,y_2)$进行放大，比如重新调整$\mathcal{D}$的分布，得到$$\begin{equation}
-\mathcal{D_{1}} = \{(x_1,y_1), (x_2,y_2),(x_2,y_2),(x_4,y_4),\}
-\end{equation}$$对于重新生成的分不$\mathcal{D_1}$,可以引入权重$w$来体现每笔Data的重要性，那么$$\begin{aligned}
-\epsilon_i= &amp;amp;\sum_{i=1}^{4} w_i^{(m)} I(G(x_i) \neq y_i)  \\
-&amp;amp; (x_1, y_1), w_1 = \frac{1}{4}\\
-&amp;amp; (x_2, y_2), w_2 = \frac{2}{4}\\
-&amp;amp; (x_3, y_3), w_3 = 0\\
-&amp;amp; (x_4, y_4), w_4 = \frac{1}{4}
-\end{aligned}$$这样也可以保证每次训练出来的若非类器不同。常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。">
+    <meta name="description" itemprop="description" content="">
     <meta name="keywords" content="null,机器学习,Boosting,AdaBoost">
 
     <!-- Site Verification -->
@@ -88,55 +69,17 @@ I_{A} = \left\{
     <meta property="og:type" content="blog">
     <meta property="og:title" content="Boosting算法——AdaBoost（1） | BigMorning&#39;s Blog">
     <meta property="og:image" content="/img/favicon.png" />
-    <meta property="og:description" content="简介Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。比如有一组Data，它训练得到一个弱学习器$G(x)$$$\begin{equation}
- \mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}  
-\end{equation}$$假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么 $$\begin{equation}
-\epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i) 
-\end{equation}$$其中$I(x)$表示指示函数，即$$\begin{equation}
-I_{A} = \left\{
-\begin{aligned}
-&amp;amp;1, x \in A \\
-&amp;amp;0, x  \not\in A
-\end{aligned}
-\right.
-\end{equation}$$对于$\mathcal{D}$的初始弱分类器对与$(x_2,y_2)$分类出现错误，我们可以对这笔错误的$(x_2,y_2)$进行放大，比如重新调整$\mathcal{D}$的分布，得到$$\begin{equation}
-\mathcal{D_{1}} = \{(x_1,y_1), (x_2,y_2),(x_2,y_2),(x_4,y_4),\}
-\end{equation}$$对于重新生成的分不$\mathcal{D_1}$,可以引入权重$w$来体现每笔Data的重要性，那么$$\begin{aligned}
-\epsilon_i= &amp;amp;\sum_{i=1}^{4} w_i^{(m)} I(G(x_i) \neq y_i)  \\
-&amp;amp; (x_1, y_1), w_1 = \frac{1}{4}\\
-&amp;amp; (x_2, y_2), w_2 = \frac{2}{4}\\
-&amp;amp; (x_3, y_3), w_3 = 0\\
-&amp;amp; (x_4, y_4), w_4 = \frac{1}{4}
-\end{aligned}$$这样也可以保证每次训练出来的若非类器不同。常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。">
+    <meta property="og:description" content="">
     <meta property="og:article:tag" content="机器学习"> <meta property="og:article:tag" content="Boosting"> <meta property="og:article:tag" content="AdaBoost"> 
 
     
         <meta property="article:published_time" content="7月 16, 2017" />
-        <meta property="article:modified_time" content="8月 20, 2017" />
+        <meta property="article:modified_time" content="9月 03, 2017" />
     
 
     <!-- The Twitter Card protocol -->
     <meta name="twitter:title" content="Boosting算法——AdaBoost（1） | BigMorning&#39;s Blog">
-    <meta name="twitter:description" content="简介Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。比如有一组Data，它训练得到一个弱学习器$G(x)$$$\begin{equation}
- \mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}  
-\end{equation}$$假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么 $$\begin{equation}
-\epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i) 
-\end{equation}$$其中$I(x)$表示指示函数，即$$\begin{equation}
-I_{A} = \left\{
-\begin{aligned}
-&amp;amp;1, x \in A \\
-&amp;amp;0, x  \not\in A
-\end{aligned}
-\right.
-\end{equation}$$对于$\mathcal{D}$的初始弱分类器对与$(x_2,y_2)$分类出现错误，我们可以对这笔错误的$(x_2,y_2)$进行放大，比如重新调整$\mathcal{D}$的分布，得到$$\begin{equation}
-\mathcal{D_{1}} = \{(x_1,y_1), (x_2,y_2),(x_2,y_2),(x_4,y_4),\}
-\end{equation}$$对于重新生成的分不$\mathcal{D_1}$,可以引入权重$w$来体现每笔Data的重要性，那么$$\begin{aligned}
-\epsilon_i= &amp;amp;\sum_{i=1}^{4} w_i^{(m)} I(G(x_i) \neq y_i)  \\
-&amp;amp; (x_1, y_1), w_1 = \frac{1}{4}\\
-&amp;amp; (x_2, y_2), w_2 = \frac{2}{4}\\
-&amp;amp; (x_3, y_3), w_3 = 0\\
-&amp;amp; (x_4, y_4), w_4 = \frac{1}{4}
-\end{aligned}$$这样也可以保证每次训练出来的若非类器不同。常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。">
+    <meta name="twitter:description" content="">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="http://yoursite.com" />
@@ -172,27 +115,8 @@ I_{A} = \left\{
     "headline": "Boosting算法——AdaBoost（1）",
     "url": "http://yoursite.com/2017/07/16/BoostAlgorithm-AdaBoost/index.html",
     "datePublished": "7月 16, 2017",
-    "dateModified": "8月 20, 2017",
-    "description": "简介Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。比如有一组Data，它训练得到一个弱学习器$G(x)$$$\begin{equation}
- \mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}  
-\end{equation}$$假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么 $$\begin{equation}
-\epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i) 
-\end{equation}$$其中$I(x)$表示指示函数，即$$\begin{equation}
-I_{A} = \left\{
-\begin{aligned}
-&amp;amp;1, x \in A \\
-&amp;amp;0, x  \not\in A
-\end{aligned}
-\right.
-\end{equation}$$对于$\mathcal{D}$的初始弱分类器对与$(x_2,y_2)$分类出现错误，我们可以对这笔错误的$(x_2,y_2)$进行放大，比如重新调整$\mathcal{D}$的分布，得到$$\begin{equation}
-\mathcal{D_{1}} = \{(x_1,y_1), (x_2,y_2),(x_2,y_2),(x_4,y_4),\}
-\end{equation}$$对于重新生成的分不$\mathcal{D_1}$,可以引入权重$w$来体现每笔Data的重要性，那么$$\begin{aligned}
-\epsilon_i= &amp;amp;\sum_{i=1}^{4} w_i^{(m)} I(G(x_i) \neq y_i)  \\
-&amp;amp; (x_1, y_1), w_1 = \frac{1}{4}\\
-&amp;amp; (x_2, y_2), w_2 = \frac{2}{4}\\
-&amp;amp; (x_3, y_3), w_3 = 0\\
-&amp;amp; (x_4, y_4), w_4 = \frac{1}{4}
-\end{aligned}$$这样也可以保证每次训练出来的若非类器不同。常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。",
+    "dateModified": "9月 03, 2017",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://yoursite.com"
@@ -409,7 +333,7 @@ I_{A} = \left\{
 
     
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#AdaBoost算法"><span class="post-toc-number">2.</span> <span class="post-toc-text">AdaBoost算法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#编程仿真"><span class="post-toc-number">3.</span> <span class="post-toc-text">编程仿真</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#尾巴"><span class="post-toc-number">4.</span> <span class="post-toc-text">尾巴</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#AdaBoost算法"><span class="post-toc-number">2.</span> <span class="post-toc-text">AdaBoost算法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#编程仿真"><span class="post-toc-number">3.</span> <span class="post-toc-text">编程仿真</span></a></li></ol>
         <!--
         <li class="mdl-menu__item">
             Some Action
@@ -557,7 +481,8 @@ I_{A} = \left\{
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。<br>比如有一组Data，它训练得到一个弱学习器$G(x)$<br><span>$$\begin{equation}
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Boosting算法是一种将弱学习器提升为强学习器的算法，弱学习器指性能比随机猜测好一点的算法（层数不深的CAST算法就是一个好的选择）。Boosting算法的工作机制都是：先根据初始训练集训练出一个弱分类器（或者基本分类器），再根据这个弱分类器的表现对训练样本进行调整，使得之前弱分类器做错的的训练样本在后续训练中获取更多的关注，从而根据调整后的分布得到新的弱分类器。如此反复学习，得到一系列的弱分类器，然后组合这些弱分类器，得到一个强学习器。</p>
+<p>比如有一组Data，它训练得到一个弱学习器$G(x)$<br><span>$$\begin{equation}
  \mathcal{D} = \{(x_1,y_1), (x_2,y_2),(x_3,y_3),(x_4,y_4),\}  
 \end{equation}$$</span><!-- Has MathJax --><br>假设$\mathcal{D_{n}}$的分类误差为$\epsilon_m$,那么<br> <span>$$\begin{equation}
 \epsilon_1 = P(G(x_i) \neq y_i) = \sum_{i=1}^{4}\frac{1}{4} I(G(x_i) \neq y_i) 
@@ -576,15 +501,15 @@ I_{A} = \left\{
 &amp; (x_2, y_2), w_2 = \frac{2}{4}\\
 &amp; (x_3, y_3), w_3 = 0\\
 &amp; (x_4, y_4), w_4 = \frac{1}{4}
-\end{aligned}$$</span><!-- Has MathJax --><br>这样也可以保证每次训练出来的若非类器不同。<br>常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。<br><a id="more"></a></p>
+\end{aligned}$$</span><!-- Has MathJax --><br>这样也可以保证每次训练出来的若非类器不同。<br>常见的Boosting算法包括:AdaBoost， Gradient Boost 和 xgboost，希望可以通过三篇博客分别总结一下这三种算法。</p>
 <h1 id="AdaBoost算法"><a href="#AdaBoost算法" class="headerlink" title="AdaBoost算法"></a>AdaBoost算法</h1><p>上面举了简单的例子， 现在拓展到一般的情况来得到AdaBoost算法。还是假设现有一笔Training Data，<br><span>$$\begin{equation}
 \mathcal{D} = \{(x_1,y_1), (x_2,y_2),...,(x_N,y_N)\} 
-\end{equation}$$</span><!-- Has MathJax --><br>其中$y_i \in \{-1, +1\}$.<br><span>$$\begin{equation}
+\end{equation}$$</span><!-- Has MathJax --><br>其中$y_i \in {-1, +1}$.<br><span>$$\begin{equation}
 G(\boldsymbol{x}) = \sum_{i=1}^{M} \alpha_i g_i(x)
-\end{equation}$$</span><!-- Has MathJax --><br>其中$\alpha_i$表是每个弱分类器的重要性。<br>我们的目标是最小化分类error，利用指数损失函数<br><span>$$\begin{aligned}
+\end{equation}$$</span><!-- Has MathJax --><br>其中$\alpha<em>i$表是每个弱分类器的重要性。<br>我们的目标是最小化分类error，利用指数损失函数<br><span>$$\begin{aligned}
 L(G|\mathcal{D}) &amp;= E_{x\sim D}(e^{-\boldsymbol{y}G(\boldsymbol{x})})\\
 &amp;=P(y=1|x)e^{-\boldsymbol{y}G(\boldsymbol{x})} + P(y=-1|x)e^{\boldsymbol{y}G(\boldsymbol{x})} 
-\end{aligned}$$</span><!-- Has MathJax --><br>其中$E_{x\sim D}$表示$\boldsymbol{x}$在$\mathcal{D}$分布下的期望。<br>要使损失函数$L(G|\mathcal{D})$最小化,很自然的是对$G(x)$求偏导<br><span>$$\begin{equation}
+\end{aligned}$$</span><!-- Has MathJax --><br>其中$E</em>{x\sim D}$表示$\boldsymbol{x}$在$\mathcal{D}$分布下的期望。<br>要使损失函数$L(G|\mathcal{D})$最小化,很自然的是对$G(x)$求偏导<br><span>$$\begin{equation}
 \frac{\partial{L(G|\mathcal{D})}}{\partial{G(\boldsymbol(x))}} = -P(y=1|x)e^{-\boldsymbol{y}G(\boldsymbol{x})} + P(y=-1|x)e^{\boldsymbol{y}G(\boldsymbol{x})}
 \end{equation}$$</span><!-- Has MathJax --><br>令导数等于0，可得<br><span>$$\begin{equation} 
 G(x) =\frac{1}{2} \ln{\frac{P(y=1|x)}{P(y=-1|x)}} 
@@ -608,9 +533,9 @@ L(\alpha_i g_i|\mathcal{D_i}) &amp;= E_{x\sim\mathcal{D_i}}[e^{-y\alpha_ig_i(x)}
 \end{equation}$$</span><!-- Has MathJax -->
 <p>令导数等于0，可解得<br><span>$$\begin{equation}
 \alpha_i=\frac{1}{2}\ln \left(\frac{1-\epsilon_i}{\epsilon_i}\right)
-\end{equation}$$</span><!-- Has MathJax --><br>所得到的$\alpha_i$表示$g_i$在最终分类器的重要性。因为每一个弱分类器的性能比随机猜测要好一些，所以分类error会小于0，因此$\alpha_i&gt;0$.并且随着$\epsilon_i$的减小，$\alpha_i$会增大，所以分类error越小的弱分类器在最终分类器中的作用会越大。<br>AdaBoost在获得$G_{i-1}$的弱学习器之后，对样本分布进行调整，使得下一轮的弱分类器可以纠正$G_{i-1}$的一些错误。理想的$G_{i}$可以纠正所有$G_{i-1}$的错误，即最小化<br><span>$$\begin{equation}
+\end{equation}$$</span><!-- Has MathJax --><br>所得到的$\alpha_i$表示$g_i$在最终分类器的重要性。因为每一个弱分类器的性能比随机猜测要好一些，所以分类error会小于0，因此$\alpha_i&gt;0$.并且随着$\epsilon_i$的减小，$\alpha_i$会增大，所以分类error越小的弱分类器在最终分类器中的作用会越大。<br>AdaBoost在获得$G<em>{i-1}$的弱学习器之后，对样本分布进行调整，使得下一轮的弱分类器可以纠正$G</em>{i-1}$的一些错误。理想的$G<em>{i}$可以纠正所有$G</em>{i-1}$的错误，即最小化<br><span>$$\begin{equation}
 L(G_{i-1}+g_i|\mathcal{D}) = E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}e^{-yg_i(x)}]
-\end{equation}$$</span><!-- Has MathJax --><br>对上式使用$e^{-yg_i(x)}$的二阶泰勒展开式近似，且因为$y^2=g^2(x)=1$,可得<br><span>$$\begin{aligned}
+\end{equation}$$</span><!-- Has MathJax --><br>对上式使用$e^{-yg<em>i(x)}$的二阶泰勒展开式近似，且因为$y^2=g^2(x)=1$,可得<br><span>$$\begin{aligned}
 L(\alpha_i g_i|\mathcal{D_i}) &amp;\simeq E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}(1-yg_{i}(x)+\frac{y^2f_i^2(x)}{2})]\\
 &amp;=E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}(1-yg_{i}(x)+\frac{1}{2})]
 \end{aligned}$$</span><!-- Has MathJax --><br>所以理想的弱分类器<br><span>$$\begin{aligned}
@@ -618,16 +543,16 @@ h_t&amp;=\arg\min_hL(G_{i-1}+g_i|\mathcal{D})\\
 &amp;= \arg\min_h E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}(x)(1-yg_{i}(x)+\frac{1}{2})]\\
 &amp;= \arg\max E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}yg_{i}(x)]\\
 &amp;= \arg\max E_{x\sim\mathcal{D}}\left[\frac{e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}yg_{i}(x)\right]
-\end{aligned}$$</span><!-- Has MathJax --><br>因为$E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]$是常数，所以不改变函数整体的单调性，令$\mathcal{D_i}$表示一个新的分布，<br><span>$$\begin{equation}
+\end{aligned}$$</span><!-- Has MathJax --><br>因为$E</em>{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]$是常数，所以不改变函数整体的单调性，令$\mathcal{D_i}$表示一个新的分布，<br><span>$$\begin{equation}
 \mathcal{D_i}(x)=\frac{\mathcal{D}(x)e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}
 \end{equation}$$</span><!-- Has MathJax --><br>因此，$g_i(x)$可以在$\mathcal{D_i}$下表示<br><span>$$\begin{aligned}
 h_t(x) &amp;= \arg\max E_{x\sim\mathcal{D}}\left[\frac{e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}yg_{i}(x)\right]\\
 &amp;= \arg\max E_{x\sim\mathcal{D_t}}[yg_i(x)]
-\end{aligned}$$</span><!-- Has MathJax --><br>因为$g(x),y\in\{-1, +1\}$,所以<br><span>$$\begin{equation}
+\end{aligned}$$</span><!-- Has MathJax --><br>因为$g(x),y\in{-1, +1}$,所以<br><span>$$\begin{equation}
 yg(x)=1-2I(y\neq g_i(x))
 \end{equation}$$</span><!-- Has MathJax --><br>所以理想的弱分类器$g_i(x)$<br><span>$$\begin{equation}
 g_i(x) = \arg\min E_{x\sim\mathcal{D_t}}[I(y\neq g_i(x))]
-\end{equation}$$</span><!-- Has MathJax --><br>由此可见， 理想的弱学习器应该在分布$\mathcal{D_i}$下最小化分类误差。<br>此外，考虑分布$\mathcal{D_i}$和$\mathcal{D}_{i+1}$的关系，根据上面的推导过程，可知<br><span>$$\begin{equation}
+\end{equation}$$</span><!-- Has MathJax --><br>由此可见， 理想的弱学习器应该在分布$\mathcal{D_i}$下最小化分类误差。<br>此外，考虑分布$\mathcal{D<em>i}$和$\mathcal{D}</em>{i+1}$的关系，根据上面的推导过程，可知<br><span>$$\begin{equation}
 \mathcal{D_i}(x)=\frac{\mathcal{D}(x)e^{-yG_{i-1}(x)}}{E_{x\sim\mathcal{D}}[e^{-yG_{i-1}(x)}]}
 \end{equation}$$</span><!-- Has MathJax --><br>这边的分布为了在算法中更好理解，可以换成它的每一个元素是之前提到的权重$w$，那么对于$w$的更新即<br><span>$$\begin{aligned}
 w_n^{i+1} &amp;= \frac{w_n^{i}}{Z_i}\exp(-\alpha_iy_ng_i(x_n))\\
@@ -637,109 +562,109 @@ w_n^{i+1} &amp;= \frac{w_n^{i}}{Z_i}\exp(-\alpha_iy_ng_i(x_n))\\
     &amp;\frac{w_n^{i}}{Z_i}e^{\alpha_i}, g_i(x_n)\neq y_n
     \end{aligned}
 \right.
-\end{aligned}$$</span><!-- Has MathJax --><br>其中$Z_i$表示规划化因子， 因为$\sum_{n=1}^{N}w_{n} =1$<br><span>$Z_i=\sum_{n=1}^{N}w_{n}^{i}\exp(-\alpha_iy_ng_i(x_n))$</span><!-- Has MathJax --><br>由上可知，被弱分类器$g_i(x)$分类错误的样本权值将会被放大，分类正确的样本权值被缩小。两者相比，分类错误的样本权值被放大了$e^{2\alpha_i} = \frac{\epsilon_i}{1-\epsilon_i}$倍。<br>综上所述，那么AdaBoost的算法表格为<br><strong>Adaboost算法</strong>：<br> <strong>1.</strong> 输入数据集合$\mathcal{D} = \{(x_1,y_1), (x_2,y_2),…,(x_N,y_N)\} $<br> <strong>2.</strong> 初始化权值分布$\mathcal{D_1}=(w_1^{1},…w_N^{1})$,其中$w_n^{1}=\frac{1}{N}, n=1,…N$<br> <strong>3.</strong> 对$i=1,…M$<br> (a).使用具有权值分布 $\mathcal{D_i}$的数据训练，得到弱分类器$g_i(x)$<br> (b).计算$g_i(x)$在训练数据上的分类误差$\epsilon_i=\sum_{n=1}^{N}w_n^iI(g_i(x_n\neq g_i(x_n)))$<br> (c).计算$g_i(x)$的重要洗系数$\alpha_i=\frac{1}{2}\ln{\frac{1-\epsilon_i}{\epsilon_i}}$<br> (d).更新数据集的权值分布<br> <span>$$\begin{aligned}
+\end{aligned}$$</span><!-- Has MathJax --><br>其中$Z<em>i$表示规划化因子， 因为$\sum</em>{n=1}^{N}w_{n} =1$<br><span>$Z_i=\sum_{n=1}^{N}w_{n}^{i}\exp(-\alpha_iy_ng_i(x_n))$</span><!-- Has MathJax --><br>由上可知，被弱分类器$g_i(x)$分类错误的样本权值将会被放大，分类正确的样本权值被缩小。两者相比，分类错误的样本权值被放大了$e^{2\alpha_i} = \frac{\epsilon_i}{1-\epsilon_i}$倍。<br>综上所述，那么AdaBoost的算法表格为<br><strong>Adaboost算法</strong>：<br> <strong>1.</strong> 输入数据集合$\mathcal{D} = {(x_1,y_1), (x_2,y_2),…,(x_N,y_N)} $<br> <strong>2.</strong> 初始化权值分布$\mathcal{D_1}=(w_1^{1},…w_N^{1})$,其中$w_n^{1}=\frac{1}{N}, n=1,…N$<br> <strong>3.</strong> 对$i=1,…M$<br> (a).使用具有权值分布 $\mathcal{D_i}$的数据训练，得到弱分类器$g_i(x)$<br> (b).计算$g_i(x)$在训练数据上的分类误差$\epsilon<em>i=\sum</em>{n=1}^{N}w_n^iI(g_i(x_n\neq g_i(x_n)))$<br> (c).计算$g_i(x)$的重要洗系数$\alpha_i=\frac{1}{2}\ln{\frac{1-\epsilon_i}{\epsilon_i}}$<br> (d).更新数据集的权值分布<br> <span>$$\begin{aligned}
 \mathcal{D_{i+1}}=(w_1^{i},...w_N^{i})\\
  w_n^{i+1} = \frac{w_n^{i}}{Z_i}\exp(-\alpha_iy_ng_i(x_n)) \\
 Z_i=\sum_{n=1}^{N}w_{n}^{i}\exp(-\alpha_iy_ng_i(x_n))
 \end{aligned}$$</span><!-- Has MathJax --><br>其中$Z_i$是规范化因子。<br><strong>4.</strong>构建所有弱分类器的线性组合，得到最终分类器<br><span>$G(x)=I[\sum_{i=1}^{M}\alpha_iG_i(x)]$</span><!-- Has MathJax --></p>
 <h1 id="编程仿真"><a href="#编程仿真" class="headerlink" title="编程仿真"></a>编程仿真</h1><p>首先产生一组数据，我这里产生分割线为sin函数的一组数据<br>数据产生代码：</p>
-<pre class=" language-lang-python"><code class="language-lang-python">import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
 
-def GenerateSinData(length):
-    x = 2 * np.pi * np.random.random(length)
-    y = 4 * np.random.random(length)
-    i = 0
-    result = np.zeros(x.shape)
-    while i < length:
-        if(y[i] >= np.sin(x[i]) + 2):
-            result[i] = 1
-            plt.plot(x[i], y[i], 'ro')
-        else:
-            result[i] = -1
-            plt.plot(x[i], y[i], 'bx')
-        i = i+1
-    plt.show()
-    X = np.array([x, y]).T
-    return X , result
+<span class="token keyword">def</span> <span class="token function">GenerateSinData</span><span class="token punctuation">(</span>length<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    x <span class="token operator">=</span> <span class="token number">2</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>pi <span class="token operator">*</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>random<span class="token punctuation">(</span>length<span class="token punctuation">)</span>
+    y <span class="token operator">=</span> <span class="token number">4</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>random<span class="token punctuation">(</span>length<span class="token punctuation">)</span>
+    i <span class="token operator">=</span> <span class="token number">0</span>
+    result <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>x<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+    <span class="token keyword">while</span> i <span class="token operator">&lt;</span> length<span class="token punctuation">:</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>y<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">>=</span> np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>x<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            result<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
+            plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> y<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'ro'</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            result<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+            plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> y<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'bx'</span><span class="token punctuation">)</span>
+        i <span class="token operator">=</span> i<span class="token operator">+</span><span class="token number">1</span>
+    plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    X <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token punctuation">,</span> y<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>T
+    <span class="token keyword">return</span> X <span class="token punctuation">,</span> result
 </code></pre>
 <p><img src="\img\TrainningData.png" alt="TrainningData"><br>弱学习我选择了DecisionStrump，单层CART树，如果将它直接应用于对上面数据的分类，由于是单层树，只能产生横线或者竖线，分类效果并不理想。<br>DecisionStrump代码：</p>
-<pre class=" language-lang-python"><code class="language-lang-python">import numpy as np
-def StumpClassify(X, j, thresh, ineq):
-    '''
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">def</span> <span class="token function">StumpClassify</span><span class="token punctuation">(</span>X<span class="token punctuation">,</span> j<span class="token punctuation">,</span> thresh<span class="token punctuation">,</span> ineq<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
     X:数据集       j:属性列
     thresh:阈值       ineq:比较
-    '''
-    pred = np.ones(X.shape[0])
-    if ineq == 'lt':
-        pred[X[:, j] <= thresh] = -1
-    else:
-        pred[X[:, j] > thresh] = 1
-    return pred
+    '''</span>
+    pred <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span>X<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> ineq <span class="token operator">==</span> <span class="token string">'lt'</span><span class="token punctuation">:</span>
+        pred<span class="token punctuation">[</span>X<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> j<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> thresh<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        pred<span class="token punctuation">[</span>X<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> j<span class="token punctuation">]</span> <span class="token operator">></span> thresh<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token keyword">return</span> pred
 
-def buildStump(X, y, w):
-    '''
+<span class="token keyword">def</span> <span class="token function">buildStump</span><span class="token punctuation">(</span>X<span class="token punctuation">,</span> y<span class="token punctuation">,</span> w<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
     X: 数据集
     y: labels
     w: 权值, 初始化为 np.ones(N)/N
-    '''
-    N, d = X.shape
-    #w = np.ones(N)/N
-    minErr = np.inf
-    numStep = 20
-    bestStump, bestLabel = {}, np.zeros(N)
+    '''</span>
+    N<span class="token punctuation">,</span> d <span class="token operator">=</span> X<span class="token punctuation">.</span>shape
+    <span class="token comment" spellcheck="true">#w = np.ones(N)/N</span>
+    minErr <span class="token operator">=</span> np<span class="token punctuation">.</span>inf
+    numStep <span class="token operator">=</span> <span class="token number">20</span>
+    bestStump<span class="token punctuation">,</span> bestLabel <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>N<span class="token punctuation">)</span>
 
-    for j in range(d):
-        rangeMin = X[:, j].min() 
-        rangeMax = X[:, j].max()
-        stepSize = (rangeMax - rangeMin)/numStep
-        for i in range(0, numStep+1):
-            thresh = rangeMin + i * stepSize
-            for ineq in ['lt', 'gt']:
-                pred = StumpClassify(X, j, thresh, ineq)
-                errLabel = np.ones(N)
-                errLabel[pred == y] = 0
-                weightedErr = w.dot(errLabel)
-                if minErr > weightedErr:
-                    minErr = weightedErr
-                    bestClass = pred
-                    bestStump['dim'] = j
-                    bestStump['ineq'] = ineq
-                    bestStump['thresh'] = thresh
-    return bestStump, minErr, bestClass
+    <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        rangeMin <span class="token operator">=</span> X<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> j<span class="token punctuation">]</span><span class="token punctuation">.</span>min<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+        rangeMax <span class="token operator">=</span> X<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> j<span class="token punctuation">]</span><span class="token punctuation">.</span>max<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        stepSize <span class="token operator">=</span> <span class="token punctuation">(</span>rangeMax <span class="token operator">-</span> rangeMin<span class="token punctuation">)</span><span class="token operator">/</span>numStep
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> numStep<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            thresh <span class="token operator">=</span> rangeMin <span class="token operator">+</span> i <span class="token operator">*</span> stepSize
+            <span class="token keyword">for</span> ineq <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">'lt'</span><span class="token punctuation">,</span> <span class="token string">'gt'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+                pred <span class="token operator">=</span> StumpClassify<span class="token punctuation">(</span>X<span class="token punctuation">,</span> j<span class="token punctuation">,</span> thresh<span class="token punctuation">,</span> ineq<span class="token punctuation">)</span>
+                errLabel <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span>N<span class="token punctuation">)</span>
+                errLabel<span class="token punctuation">[</span>pred <span class="token operator">==</span> y<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+                weightedErr <span class="token operator">=</span> w<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>errLabel<span class="token punctuation">)</span>
+                <span class="token keyword">if</span> minErr <span class="token operator">></span> weightedErr<span class="token punctuation">:</span>
+                    minErr <span class="token operator">=</span> weightedErr
+                    bestClass <span class="token operator">=</span> pred
+                    bestStump<span class="token punctuation">[</span><span class="token string">'dim'</span><span class="token punctuation">]</span> <span class="token operator">=</span> j
+                    bestStump<span class="token punctuation">[</span><span class="token string">'ineq'</span><span class="token punctuation">]</span> <span class="token operator">=</span> ineq
+                    bestStump<span class="token punctuation">[</span><span class="token string">'thresh'</span><span class="token punctuation">]</span> <span class="token operator">=</span> thresh
+    <span class="token keyword">return</span> bestStump<span class="token punctuation">,</span> minErr<span class="token punctuation">,</span> bestClass
 </code></pre>
 <p>最后得到的分类误差是0.125<br><img src="\img\DecisionStumpResult.png" alt="TrainningData"></p>
 <p>将DecisionStrump作为弱学习器应用于AdaBoost,进行10次迭代，可以看出分类误差得到了明显的下降</p>
-<pre class=" language-lang-python"><code class="language-lang-python">import numpy as np
-from DecisionStump import *
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">from</span> DecisionStump <span class="token keyword">import</span> <span class="token operator">*</span>
 
-def AdaboostTest(DataArr, classLabel, iteration):
-    weakClassArr = []
-    N = DataArr.shape[0]
-    D = np.ones(N)/N
-    aggClassEst = np.zeros(N)
-    for i in range(iteration):
-        bestStump, error, classEst = buildStump(DataArr, classLabel, D)
+<span class="token keyword">def</span> <span class="token function">AdaboostTest</span><span class="token punctuation">(</span>DataArr<span class="token punctuation">,</span> classLabel<span class="token punctuation">,</span> iteration<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    weakClassArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    N <span class="token operator">=</span> DataArr<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    D <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span>N<span class="token punctuation">)</span><span class="token operator">/</span>N
+    aggClassEst <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>N<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>iteration<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        bestStump<span class="token punctuation">,</span> error<span class="token punctuation">,</span> classEst <span class="token operator">=</span> buildStump<span class="token punctuation">(</span>DataArr<span class="token punctuation">,</span> classLabel<span class="token punctuation">,</span> D<span class="token punctuation">)</span>
 
-        alpha = float(0.5*np.log((1-error)/max(error, 1e-16)))
-        bestStump['alpha'] = alpha
-        weakClassArr.append(bestStump)
-        expon = np.multiply(-1*alpha*classLabel.T, classEst)
-        D = np.multiply(D, np.exp(expon))
-        D = D/D.sum()
-        aggClassEst += alpha*classEst
+        alpha <span class="token operator">=</span> float<span class="token punctuation">(</span><span class="token number">0.5</span><span class="token operator">*</span>np<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">-</span>error<span class="token punctuation">)</span><span class="token operator">/</span>max<span class="token punctuation">(</span>error<span class="token punctuation">,</span> <span class="token number">1e</span><span class="token operator">-</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        bestStump<span class="token punctuation">[</span><span class="token string">'alpha'</span><span class="token punctuation">]</span> <span class="token operator">=</span> alpha
+        weakClassArr<span class="token punctuation">.</span>append<span class="token punctuation">(</span>bestStump<span class="token punctuation">)</span>
+        expon <span class="token operator">=</span> np<span class="token punctuation">.</span>multiply<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token operator">*</span>alpha<span class="token operator">*</span>classLabel<span class="token punctuation">.</span>T<span class="token punctuation">,</span> classEst<span class="token punctuation">)</span>
+        D <span class="token operator">=</span> np<span class="token punctuation">.</span>multiply<span class="token punctuation">(</span>D<span class="token punctuation">,</span> np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span>expon<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        D <span class="token operator">=</span> D<span class="token operator">/</span>D<span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        aggClassEst <span class="token operator">+=</span> alpha<span class="token operator">*</span>classEst
 
-        aggErrors = np.multiply(np.sign(aggClassEst) != classLabel.T, np.ones(N))
-        errorRate = aggErrors.sum()/N
-        print("Total errtor", errorRate, "\n")
-        if errorRate == 0.0: 
-            break
-    return  weakClassArr
+        aggErrors <span class="token operator">=</span> np<span class="token punctuation">.</span>multiply<span class="token punctuation">(</span>np<span class="token punctuation">.</span>sign<span class="token punctuation">(</span>aggClassEst<span class="token punctuation">)</span> <span class="token operator">!=</span> classLabel<span class="token punctuation">.</span>T<span class="token punctuation">,</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span>N<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        errorRate <span class="token operator">=</span> aggErrors<span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span>N
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Total errtor"</span><span class="token punctuation">,</span> errorRate<span class="token punctuation">,</span> <span class="token string">"\n"</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> errorRate <span class="token operator">==</span> <span class="token number">0.0</span><span class="token punctuation">:</span> 
+            <span class="token keyword">break</span>
+    <span class="token keyword">return</span>  weakClassArr
 </code></pre>
 <p>Total error 0.125<br>Total error 0.125<br>Total error 0.085<br>Total error 0.06<br>Total error 0.06<br>Total error 0.06<br>Total error 0.04<br>Total error 0.04<br>Total error 0.04<br>Total error 0.045<br><img src="\img\AdaBoostResult.png" alt="TrainningData"></p>
-<h1 id="尾巴"><a href="#尾巴" class="headerlink" title="尾巴"></a>尾巴</h1><p>这是我第一次写博客，选择AdaBoost算法开始是因为前段时间正好看完了台大林轩田老师关于Blending的内容，觉得由推导到算法都很神奇。这篇博客内容虽然并不是很多，但是我写了大概一天（一直在打公式），感觉条理不明确，思路也不清晰，大多都是在参考书上的内容，自己的理解比较少，希望自己可以继续加油，在以后的博客里多增加一些自己的思考。</p>
-<p><strong>参考：</strong><br>1、统计学习方法—李航<br>2、机器学习—周志华<br>3、机器学习实战<br>4、机器学习技法—台湾大学林轩田老师公开课</p>
+<p>#尾巴<br>这是我第一次写博客，选择AdaBoost算法开始是因为前段时间正好看完了台大林轩田老师关于Blending的内容，觉得由推导到算法都很神奇。这篇博客内容虽然并不是很多，但是我写了大概一天（一直在打公式），感觉条理不明确，思路也不清晰，大多都是在参考书上的内容，自己的理解比较少，希望自己可以继续加油，在以后的博客里多增加一些自己的思考。</p>
+<p><strong>参考：</strong><br>1、统计学习方法–李航<br>2、机器学习–周志华<br>3、机器学习实战<br>4、机器学习技法–台湾大学林轩田老师公开课</p>
 
     
 
@@ -836,7 +761,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
 
     <!-- Sidebar Email -->
     <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-        chjcj6565122@163.com
+        chjcj86565122@163.com
         <b class="caret"></b>
     </a>
 </div>
@@ -885,7 +810,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
@@ -903,7 +828,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/数学/">数学<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/机器学习/">机器学习<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活琐事/">生活琐事<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/数学/">数学<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/机器学习/">机器学习<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/深度学习/">深度学习<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活琐事/">生活琐事<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -927,7 +852,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
         <li>
             <a href="/archives">
                 文章总数
-                <span class="sidebar-badge">4</span>
+                <span class="sidebar-badge">5</span>
             </a>
         </li>
         

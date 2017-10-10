@@ -12,7 +12,7 @@
     
     <title>
         
-            第一篇博客 | 
+            深度学习读书笔记（1）————深度前馈网络 | 
         
         BigMorning&#39;s Blog
     </title>
@@ -38,7 +38,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="BigMorning">
     <meta name="description" itemprop="description" content="">
-    <meta name="keywords" content="null,琐碎随笔, 测试">
+    <meta name="keywords" content="null,深度学习,前馈网络,隐藏层， 反向传播">
 
     <!-- Site Verification -->
     
@@ -67,18 +67,18 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://yoursite.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="第一篇博客 | BigMorning&#39;s Blog">
+    <meta property="og:title" content="深度学习读书笔记（1）————深度前馈网络 | BigMorning&#39;s Blog">
     <meta property="og:image" content="/img/favicon.png" />
     <meta property="og:description" content="">
-    <meta property="og:article:tag" content="琐碎随笔, 测试"> 
+    <meta property="og:article:tag" content="深度学习"> <meta property="og:article:tag" content="前馈网络"> <meta property="og:article:tag" content="隐藏层， 反向传播"> 
 
     
-        <meta property="article:published_time" content="7月 12, 2017" />
-        <meta property="article:modified_time" content="7月 18, 2017" />
+        <meta property="article:published_time" content="9月 10, 2017" />
+        <meta property="article:modified_time" content="10月 10, 2017" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="第一篇博客 | BigMorning&#39;s Blog">
+    <meta name="twitter:title" content="深度学习读书笔记（1）————深度前馈网络 | BigMorning&#39;s Blog">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
@@ -86,7 +86,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://yoursite.com/2017/07/12/first_blog/index.html" />
+        <link rel="canonical" href="http://yoursite.com/2017/09/10/deepfeedforward/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -112,10 +112,10 @@
         },
         "description": "一只大水货的奋斗路"
     },
-    "headline": "第一篇博客",
-    "url": "http://yoursite.com/2017/07/12/first_blog/index.html",
-    "datePublished": "7月 12, 2017",
-    "dateModified": "7月 18, 2017",
+    "headline": "深度学习读书笔记（1）————深度前馈网络",
+    "url": "http://yoursite.com/2017/09/10/deepfeedforward/index.html",
+    "datePublished": "9月 10, 2017",
+    "dateModified": "10月 10, 2017",
     "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -333,7 +333,7 @@
 
     
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Quick-Start"><span class="post-toc-number">1.</span> <span class="post-toc-text">Quick Start</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Create-a-new-post"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Create a new post</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码测试"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">代码测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#公式测试"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">公式测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Deploy-to-remote-sites"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-代价函数"><span class="post-toc-number">1.</span> <span class="post-toc-text">1 代价函数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-隐藏层"><span class="post-toc-number">2.</span> <span class="post-toc-text">2 隐藏层</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-结构设计"><span class="post-toc-number">3.</span> <span class="post-toc-text">3 结构设计</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-反向传播"><span class="post-toc-number">4.</span> <span class="post-toc-text">4 反向传播</span></a></li></ol>
         <!--
         <li class="mdl-menu__item">
             Some Action
@@ -371,7 +371,7 @@
         
     
             <p class="article-headline-p">
-                第一篇博客
+                深度学习读书笔记（1）————深度前馈网络
             </p>
         </div>
 
@@ -390,7 +390,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>BigMorning</strong>
-        <span>7月 12, 2017</span>
+        <span>9月 10, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -414,7 +414,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/琐碎随笔-测试/">琐碎随笔, 测试</a>
+        <a class="post_tag-link" href="/tags/前馈网络/">前馈网络</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/深度学习/">深度学习</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/隐藏层，-反向传播/">隐藏层， 反向传播</a>
     </ul>
     
 
@@ -430,7 +430,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=第一篇博客&url=http://yoursite.com/2017/07/12/first_blog/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=深度学习读书笔记（1）————深度前馈网络&url=http://yoursite.com/2017/09/10/deepfeedforward/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -439,7 +439,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=第一篇博客&url=http://yoursite.com/2017/07/12/first_blog/index.html&via=BigMorning" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=深度学习读书笔记（1）————深度前馈网络&url=http://yoursite.com/2017/09/10/deepfeedforward/index.html&via=BigMorning" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -448,7 +448,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/07/12/first_blog/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/10/deepfeedforward/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -457,7 +457,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com/2017/07/12/first_blog/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/10/deepfeedforward/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -481,41 +481,37 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>这位是我的第一篇博客，我将做一些测试</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="代码测试"><a href="#代码测试" class="headerlink" title="代码测试"></a>代码测试</h3><pre class=" language-python"><code class="language-python">@requires_authorization
-<span class="token keyword">class</span> <span class="token class-name">SomeClass</span><span class="token punctuation">:</span>
-    <span class="token keyword">pass</span>
-
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># A comment</span>
-    <span class="token keyword">print</span> <span class="token string">'hello world'</span>
-</code></pre>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>ArrayList
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span><span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">blotTest</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"This is my first blog"</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="公式测试"><a href="#公式测试" class="headerlink" title="公式测试"></a>公式测试</h3><span>$$\begin{aligned}
-\dot{x} &amp; = \sigma(y-x) \\
-\dot{y} &amp; = \rho x - y - xz \\
-\dot{z} &amp; = -\beta z + xy
-\end{aligned}$$</span><!-- Has MathJax -->
-<p>$$\frac{\partial u}{\partial t}<br>= h^2 \left( \frac{\partial^2 u}{\partial x^2} +<br>\frac{\partial^2 u}{\partial y^2} +<br>\frac{\partial^2 u}{\partial z^2}\right)$$</p>
-<p>Simple inline $a = b + c$.</p>
-<p>\begin{equation}\notag<br>    \boldsymbol{y} = \boldsymbol{A} \boldsymbol{x} + \boldsymbol{n}<br>\end{equation}</p>
-<p>$$ E=mc^2 $$<br>\begin{equation}<br>y=Ax+n<br>\end{equation}</p>
-<p>$$ \sum_{i=1}^n a_i=0 $$</p>
-<p>\begin{align}<br>    \boldsymbol{y} &amp;= \boldsymbol{A} \boldsymbol{x} + \boldsymbol{n}\<br>    &amp; = \boldsymbol{\phi} \boldsymbol{\theta} \boldsymbol{x} + \boldsymbol{n}<br>\end{align}</p>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>深度前馈网络（deep feedforward network），也叫做前馈神经网络（feedforward neural network）或者多层感知机（multilayer perceptron, MLP）。前馈网络是深度学习的基础，同时在工业应用中也有很重要的作用。</p>
+<ul>
+<li>输出层（output layer）：前馈网络的最后一层称为输出层，对于输出层，学习算法知道输出层应该做什么：使得训练数据的输出接近真实值。</li>
+<li>隐藏层（hidden layer）：对于其他网络层，学习算法不能直接指明这些层应该怎么做，因此这些层被称为隐藏层，宽度是指隐藏层的维度。</li>
+<li>前馈（feedforward）：前馈模型中输入信息流$\boldsymbol{x}$经定义神经网络的每一层隐藏单元，到输出$y$，模型的输出到模型之间没有反馈（feedback）连接。</li>
+<li>循环神经网络（recurrent neural network）:前馈神经网络包含了反馈连接时，这样的神经网络结构称为循环神经网络。<h1 id="1-代价函数"><a href="#1-代价函数" class="headerlink" title="1 代价函数"></a>1 代价函数</h1>深度神经网络设计中的一个重要方面是代价函数的选择。<br>大多数现代神经网络使用最大似然来训练，代价函数就是负的似然对数，它与训练数据和模型分布间的交叉熵等价。代价函数表示为<span>$$\begin{equation}
+J(\theta) = -E_{x,y\sim \hat{p}_{data}} \log p_{model}(\boldsymbol{y}|\boldsymbol{x})
+\end{equation}$$</span><!-- Has MathJax -->
+使用最大似然来到处代价函数的方法的一个优势是，减轻了为每个模型设计代价函数的负担，明确了一个模型$p(\boldsymbol{y}|\boldsymbol{x})$就自动确定了一个代价函数$\log p(\boldsymbol{y}|\boldsymbol{x})$。代价函数的的梯度必须足够大且具有足够的预测性，饱和（非常平）的函数会使梯度变小。负的对数似然消除了某些输出单元中的指数效果（指数函数变量取值是非常大的负值时会造成饱和）。  交叉熵代价函数应用在实践中经常没有最小值，可以通过正则化修正学习问题。<br>最大似然是训练sigmoid输出单元的优选方法，使用其它损失函数，损失函数会在变量非常小的负值时饱和到0，取到非常大的正值时饱和到1，梯度会变得非常小以至于不能用来学习。</li>
+</ul>
+<h1 id="2-隐藏层"><a href="#2-隐藏层" class="headerlink" title="2 隐藏层"></a>2 隐藏层</h1><p>整形流行单元（RELU）：<br><span>$$\begin{equation}
+g(z) = \max(0, z)
+\end{equation}$$</span><!-- Has MathJax --><br><strong>特点</strong>：处于激活状态，一阶导数处处为1。通常作用于仿射变换：$h=g(W^Tx+b)$<br><strong>缺点</strong>：未激活状态不能带来基于梯度学习的效果。<br><strong>改进</strong>：<br><span>$$\begin{equation}
+g(z,\alpha)_i=\max(0,z_i)+\alpha_i\min(0,z_i)
+\end{equation}$$</span><!-- Has MathJax --></p>
+<ul>
+<li>绝对值整流：(absolute value rectification):固定$\alpha_i=-1$,得到$g(z) = |z|$</li>
+<li>渗漏整流线性单元(Leaky ReLU): 固定$\alpha_i$为一个类似0.01的小值</li>
+<li>参数化整流线性单元(parametric ReLU),将$\alpha_i$作为一个要学习的参数</li>
+</ul>
+<p><strong>maxout unit</strong>进一步跨站了ReLU，将$z$划分为每组具有$k$个值的组，表示为<br><span>$$\begin{equation}
+g(z)_i =\max_{j\in G^{(i)}}(z_j)
+\end{equation}$$</span><!-- Has MathJax --><br>$G^{(i)}$是组$i$的输入索引集合$(i-1)k+1,…,ik$，maxout可以学习k段的线性凸函数。的那个k足够当时，maxout可以以任意精度来近似凸函数。但是训练maxout需要更多的正则化或者更多训练样本来提高模型的泛化能力。<br>ReLu和其扩展都是基于它们的行为接近线性，更易优化的原则。<br>此外双曲正切函数$g(z)=\tanh(z)$通常比sigmoid函数表现号，它可以用sigmoid函数表示<br><span>$$\begin{equation}
+\tanh(z)=2\sigma(2z)-1
+\end{equation}$$</span><!-- Has MathJax --></p>
+<h1 id="3-结构设计"><a href="#3-结构设计" class="headerlink" title="3 结构设计"></a>3 结构设计</h1><p>神经网络设计的另一个关键点是确定它的结构。<br>一般降级考虑为简单的层的链式结构。主要考虑选择网络的深度和每一层的宽度。<br>通用近似定力表明:一个前馈神经网络如果具有输出层和至少具有一层“挤压”性质的激活函数（比如logistic sigmoid激活函数）的隐藏层，只要网络有足够数量的隐藏单元，可以以任意精度来近似任何从一个有限维空间到另一个有限维空间的Borel可测函数。即神经网络可以近似从任何有限维离散空间映射到任意的函数。<br>增加网络的深度往往能够得到比增加宽度更加好的泛化能力。</p>
+<h1 id="4-反向传播"><a href="#4-反向传播" class="headerlink" title="4 反向传播"></a>4 反向传播</h1><p>输入提供初始信息，然后传播到每一层的隐藏单元，最终产生输出$\hat{y}$,称为<strong>前向传播</strong>，训练过程中，前向传播可以持续向前产生代价函数$J(\theta)$。<strong>反向传播</strong>通过将来自代价函数的信息往后流动来计算梯度，反向传播仅用于计算梯度。<br><strong>链式法则</strong><br>假设$\boldsymbol{x}\in\mathcal{R}^m$,$\boldsymbol{y}\in\mathcal{R}^n$,$g$是从$\mathcal{R}^m$到$\mathcal{R}^n$的映射，$f$是从$\mathcal{R}^n$到$\mathcal{R}$的映射。如果$\boldsymbol{y}=g(\boldsymbol{x})$且$z=f(\boldsymbol{y})$，那么<br><span>$$\begin{equation}
+\frac{\partial z}{\partial x_i}=\sum_j \frac{\partial z}{\partial y_j} \frac{\partial y_j}{\partial x_i}
+\end{equation}$$</span><!-- Has MathJax --><br>用向量记法，可以等下写成<br><span>$$\begin{equation}
+\nabla_{\boldsymbol{x}}z=\left(\frac{\partial \boldsymbol{y}}{\partial   \boldsymbol{x}}\right)\nabla_{\boldsymbol{y}}z
+\end{equation}$$</span><!-- Has MathJax --></p>
 
     
 
@@ -531,7 +527,7 @@
     <!-- 使用 changyan -->
 <div id="changyan-comment">
     <!--PC和WAP自适应版-->
-<div id="SOHUCS" sid="2017/07/12/first_blog/"  ></div>
+<div id="SOHUCS" sid="2017/09/10/deepfeedforward/"  ></div>
 <script type="text/javascript">
 (function(){
 var appid = 'cyt78gWUB';
@@ -555,19 +551,19 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/07/16/BoostAlgorithm-AdaBoost/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
+    
+        <a href="/2017/09/03/CommonDistribution/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
     
 </nav>
 
