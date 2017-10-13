@@ -62,8 +62,7 @@ g(z)_i =\max_{j\in G^{(i)}}(z_j)
     <entry>
       <title><![CDATA[常用分布函数]]></title>
       <url>/2017/09/03/CommonDistribution/</url>
-      <content type="html"><![CDATA[<p>这位是我的第一篇博客，我将做一些测试</p>
-<h1 id="二项分布"><a href="#二项分布" class="headerlink" title="二项分布"></a>二项分布</h1><p>二项分布就是重复n次伯努利试验。在试验中只有两种可能的结果，且这两种可能的结果对立且相互独立，与其它各次试验结果无关。在实验中结果为0或1的分布，叫做0-1分布。<br>如果随机变量$X$是参数为$n$和$p$的二项分布，记为$X \sim B(n,p)$。二项分布的概率分布函数为<br><span>$$\begin{equation}
+      <content type="html"><![CDATA[<h1 id="二项分布"><a href="#二项分布" class="headerlink" title="二项分布"></a>二项分布</h1><p>二项分布就是重复n次伯努利试验。在试验中只有两种可能的结果，且这两种可能的结果对立且相互独立，与其它各次试验结果无关。在实验中结果为0或1的分布，叫做0-1分布。<br>如果随机变量$X$是参数为$n$和$p$的二项分布，记为$X \sim B(n,p)$。二项分布的概率分布函数为<br><span>$$\begin{equation}
 Pr(k;n,p) = Pr(X=k) = C_n^k p^k (1-p)^{n-k}
 \end{equation}$$</span><!-- Has MathJax --><br>均值为$np$, 方差为$np(1-p)$</p>
 <h1 id="多项分布"><a href="#多项分布" class="headerlink" title="多项分布"></a>多项分布</h1><p><strong>多项式分布是二项分布的推广</strong>。把二项分布公式的两个状态推广至多个状态，就得到了多项分布。<br>多项分布的概率分布函数是<br><span>$$\begin{aligned}
@@ -263,9 +262,9 @@ f(x;\alpha, \beta) = \textrm{constant} \cdot x^{\alpha - 1} (1-x)^{\beta - 1}=\f
         
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> kaggle </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> 总结 </tag>
             
